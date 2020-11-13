@@ -1,10 +1,10 @@
 # Project-p6
-*:clipboard: Belangrijke Informatie*
+# *:clipboard: Belangrijke Informatie*
 ----------------
----
-**:briefcase: Begeleider**
+
+### **:briefcase: Begeleider**
 Fedde van Gils - *f.vangils@curio.nl*
-** 🙏 Team**
+### 🙏 Team
 - Luka Leppens        -  *D272335@edu.rocwb.nl*
 - Jaidy Mullens       - *D275435@edu.rocwb.nl*
 - Sjoerd Bulthuis     - *D275092@edu.rocwb.nl*
