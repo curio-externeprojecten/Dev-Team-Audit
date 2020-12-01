@@ -6,6 +6,9 @@
 
         <title>@yield('title')</title>
 
+        {{-- stylesheet --}}
+        <link href=" {{ asset('css/main.css')}} " rel="stylesheet" type="text/css">
+
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 
@@ -13,18 +16,19 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     </head>
     <header>
-
-        @yield('header')
-
+        <nav class="navbar navbar-expand-sm bg-curio navbar-dark sticky-top">
+            <div class="container-fluid">
+                <ul class="navbar-nav">
+                    <img src="https://cdn.nieuws.nl/media/sites/384/2019/09/26165915/Curio-logo-1-300x171.jpg" alt="curio">
+                    @yield('header')
+                </ul>
+            </div>
+        </nav>
     </header>
     <body>
-
         @yield('content')
-
     </body>
     <footer>
-
-
 
     </footer>
 
