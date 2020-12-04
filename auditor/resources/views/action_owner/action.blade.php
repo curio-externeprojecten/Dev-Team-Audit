@@ -6,5 +6,5 @@
 @endsection
 
 @section('content')
-   action action owner
+    <h1>This is the action owner home page!</h1>
 @endsection

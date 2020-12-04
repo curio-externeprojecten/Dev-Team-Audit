@@ -20,3 +20,7 @@ Route::get('/', function () {
 Route::get('problem_dashboard', function () {
     return view('problem_owner.dashboard');
 });
+
+Route::get('action_owner', function(){
+    return view('action_owner\action');
+});
