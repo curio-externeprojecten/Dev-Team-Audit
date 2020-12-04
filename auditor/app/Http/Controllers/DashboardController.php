@@ -27,7 +27,7 @@ class DashboardController extends Controller
    {
         // db data
         $id = Auth::id(); 
-        $role = DB::table('roles')->where('id', $id)->value('role');
+        $role = DB::table('roles')->where('user_id', $id)->value('role');
         $_SESSION['role'] = $role; // set a session for easier use
 
         // Check if id exists
