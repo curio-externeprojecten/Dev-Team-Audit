@@ -20,10 +20,3 @@ Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'dash
 Route::get('problem_dashboard', function () {
     return view('problem_owner.dashboard');
 });
-<<<<<<< HEAD
-
-Route::get('action_owner', function(){
-    return view('action_owner\action');
-});
-=======
->>>>>>> ccc61145d4cedf5eb5b2dbc2ce472a1e355f4137
