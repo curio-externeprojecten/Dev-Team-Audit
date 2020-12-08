@@ -23,10 +23,18 @@ Route::get('/action', [App\Http\Controllers\ActionController::class, 'getAction'
 
 //Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'getActions'])->name('dashboard');
 
-Route::get('problem_dashboard', function () {
-    return view('problem_owner.dashboard');
-});
+Route::get('problem_dashboard', [App\Http\Controllers\DashboardController::class, 'problem_actions']);
 
 Route::get('action_owner', function(){
     return view('action_owner\action');
 });
+
+<<<<<<< Updated upstream
+Route::get('action_owner', function(){
+    return view('action_owner\action');
+});
+=======
+Route::get('create_action', function() {
+    return view('auditor.create_action');
+});
+>>>>>>> Stashed changes
