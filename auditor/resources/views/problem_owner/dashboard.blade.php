@@ -14,7 +14,7 @@
                 <a class="nav-link " href="problem_owner_sended">Toegewezen acties</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " href="problem_owner_received">Terug ontvangen acties</a>
+                <a class="nav-link " href="/received">Terug ontvangen acties</a>
             </li>
         </div>
 @endsection
@@ -35,14 +35,17 @@
                 @endforeach
             </div>
           </div>
-
-        @foreach ($actions as $action)
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                <label class="form-check-label" for="defaultCheck1">
-                <a href="">{{ $action->omschrijving }}</a>
-            </label>
-          </div>
-        @endforeach
+        
+        @if (isset($actions))
+            @foreach ($actions as $action)
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                    <label class="form-check-label" for="defaultCheck1">
+                        <a href="">{{ $action->omschrijving }}</a>
+                    </label>
+                </div>
+            @endforeach
+        @endif
+        
     </div>
 @endsection
