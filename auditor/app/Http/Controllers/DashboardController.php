@@ -40,7 +40,7 @@ class DashboardController extends Controller
             if( $role == "Auditor" ){
                 return view('auditor.dashboard');
             }
-            elseif ( $role == "Probleem Eigenaar" ){
+            else if ( $role == "Probleem Eigenaar" ){
                 return view('problem_owner.dashboard');
             }
             else {
