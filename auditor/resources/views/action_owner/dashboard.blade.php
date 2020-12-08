@@ -7,4 +7,5 @@
 
 @section('content')
     action owner
+    {{$actions}}
 @endsection
