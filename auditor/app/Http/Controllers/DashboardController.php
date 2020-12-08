@@ -69,8 +69,8 @@ class DashboardController extends Controller
               // Check what role the user has so we can send all the right actions to the desired person
             if( $role == "Auditor" ){
                 
-            }
-            else if ( $role == "Probleem_Eigenaar" ){
+            } 
+            else if ( $role == "Probleem-Eigenaar" ){
                 $action = DB::table('actie')->select('*')->where('probleem_eigenaar_id', $id)->get();
                 return $action;
             }

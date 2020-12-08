@@ -67,6 +67,11 @@
     </header>
     <body>
         @yield('content')
+        <div class="action_class">
+
+            @yield('action_content')
+            
+        </div>
     </body>
     <footer>
 
