@@ -19,8 +19,6 @@ Auth::routes();
 Route::get('/', [App\Http\Controllers\DashboardController::class, 'dashboard']);
 
 Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'dashboard'])->name('dashboard');
-Route::get('/action', [App\Http\Controllers\ActionController::class, 'getAction'])->name('getAction');
-
 //Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'getActions'])->name('dashboard');
 
 Route::get('problem_owner_received', function(){

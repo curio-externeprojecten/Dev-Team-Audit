@@ -23,8 +23,6 @@
     <div class="actions">
         <h1>Eigen acties:</h1>
 
-        <p>Select all: <input id="checkall" class="" type="checkbox"></p>
-        
         <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Actie-Eigenaren
@@ -34,15 +32,17 @@
                     <a class="dropdown-item" href="#"> {{ $action_owner->name }} </a>
                 @endforeach
             </div>
-          </div>
+        </div>
+
+        <p>Select all: <input id="checkall" class="" type="checkbox"></p>
 
         @foreach ($actions as $action)
             <div class="form-check">
                 <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
                 <label class="form-check-label" for="defaultCheck1">
-                <a href="">{{ $action->omschrijving }}</a>
-            </label>
-          </div>
-        @endforeach
+                    <a href="">{{ $action->omschrijving }}</a>
+                </label>
+            </div>
+        @endforeach 
     </div>
 @endsection
