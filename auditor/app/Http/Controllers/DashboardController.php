@@ -36,10 +36,17 @@ class DashboardController extends Controller
         $action_owners = $this->getAction_Owners();
         
       $sectors = \DB::table('sector')->get();
-      
+      $risicosoorten = \DB::table('risicosoort')->get();
+      $risicoclassificaties = \DB::table('risicoclassificatie')->get();
+      $users = \DB::table('users')->where('name')->get();
+      $statussen = \DB::table('status')->get();
 
       return view('auditor.create_action' , [
-          'sectors' => $sectors
+          'sectors' => $sectors,
+          'risicosoorten' => $risicosoorten,
+          'risicoclassificaties' => $risicoclassificaties,
+          'users' => $users,
+          'statussen' => $statussen
       ]);
 
         // Check if id exists
@@ -101,13 +108,5 @@ class DashboardController extends Controller
             return $action_owners;
    }
 
-<<<<<<< Updated upstream
-   public function sendAction(){
-            
-   }
-=======
-  
 
-
->>>>>>> Stashed changes
 }
