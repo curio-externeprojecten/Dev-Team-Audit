@@ -29,12 +29,6 @@ Route::get('action_owner', function(){
     return view('action_owner\action');
 });
 
-<<<<<<< Updated upstream
-Route::get('action_owner', function(){
-    return view('action_owner\action');
-});
-=======
 Route::get('create_action', function() {
     return view('auditor.create_action');
 });
->>>>>>> Stashed changes
