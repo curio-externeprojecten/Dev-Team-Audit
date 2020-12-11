@@ -7,8 +7,7 @@
 
 @section('content')
     
-<div class="create-Action" id="post">
-
+<div class="create_action" id="post">
     <form action=<?php echo "../../../app/Http/Controllers/ActionController.php" ?> method="POST">
             <div class="form-group">
               <div class="d-flex justify-content-between align-items-center">
@@ -78,9 +77,18 @@
               <div class="d-flex justify-content-between align-items-center">
                 <input class="form-control" type="text" placeholder="oordel IA" name="oordeel_ia" required>
               </div>
-              <div class="form-group">
-              <div class="d-flex justify-content-between align-items-center">
-                <input class="form-control" type="text" placeholder="sector" name="sector" required>
+
+              <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                   Sector
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"> 
+                  
+                <a class="dropdown-item" href="#"> @foreach ($sectors as $sector)
+                @endforeach  {{$sector->sector}}   </a>
+               
+                          
+                </div> 
               </div>
             <div class="form-group">
               <div class="d-flex justify-content-between align-items-center">
