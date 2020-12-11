@@ -43,7 +43,7 @@
               </div> 
               <div class="form-group">
               <div class="d-flex justify-content-between align-items-center">
-                <input class="form-control" type="text" placeholder="oorzak" name="oorzak" required>
+                <input class="form-control" type="text" placeholder="oorzaak" name="oorzaak" required>
               </div>
              <div class="form-group">
               <div class="d-flex justify-content-between align-items-center">
@@ -77,50 +77,103 @@
               <div class="d-flex justify-content-between align-items-center">
                 <input class="form-control" type="text" placeholder="oordel IA" name="oordeel_ia" required>
               </div>
-
-              <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                   Sector
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"> 
-                  
-                <a class="dropdown-item" href="#"> @foreach ($sectors as $sector)
-                @endforeach  {{$sector->sector}}   </a>
-               
-                          
+              <div class="form-group">
+                <label for="sector">Selecteer sector</label>
+                <select class="form-control" id="sector">
+                  @foreach ($sectors as $sector)  
+                  <option>
+                    {{$sector->sector}}
+                  </option>
+                  @endforeach
+                </select>
+              </div>          
                 </div> 
               </div>
-            <div class="form-group">
-              <div class="d-flex justify-content-between align-items-center">
-                <input class="form-control" type="text" placeholder="primair risico soort" name="p_risico" required>
-              </div>
-            <div class="form-group">
-              <div class="d-flex justify-content-between align-items-center">
-                <input class="form-control" type="text" placeholder="secondaire risico soort" name="s_risico" required>
-              </div>
-            <div class="form-group">
-              <div class="d-flex justify-content-between align-items-center">
-                <input class="form-control" type="text" placeholder="actuele risico soort classificatie IA" name="a_risico" required>
-              </div>
-            <div class="form-group">
-              <div class="d-flex justify-content-between align-items-center">
-                <input class="form-control" type="text" placeholder="oorzak classificatie" name="oorzak_classificatie" required>
-              </div>
-            <div class="form-group">
-              <div class="d-flex justify-content-between align-items-center">
-                <input class="form-control" type="text" placeholder="gerappoteerd risico" name="g_risico" required>
-              </div>
+              <div class="form-group">
+                <label for="sector">Selecteer primair risicosoort</label>
+                <select class="form-control" id="pr">
+                  @foreach ($risicosoorten as $risicosoort)  
+                  <option>
+                    {{$risicosoort->primair}}
+                  </option>
+                  @endforeach
+                </select>
+              </div>          
+                </div> 
+                <div class="form-group">
+                  <label for="sector">Selecteer secondaire risicosoort</label>
+                  <select class="form-control" id="sr">
+                    @foreach ($risicosoorten as $risicosoort)  
+                    <option>
+                      {{$risicosoort->secundair}}
+                    </option>
+                    @endforeach
+                  </select>
+                </div>          
+                  </div> 
+                  <div class="form-group">
+                    <label for="sector">Selecteer actuale risicoclassificatie</label>
+                    <select class="form-control" id="arc">
+                      @foreach ($risicoclassificaties as $risicoclassificatie)  
+                      <option>
+                        {{ $risicoclassificatie->actuele_risicoclassificatie_ia}}
+                      </option>
+                      @endforeach
+                    </select>
+                  </div>          
+                    </div> 
+                  </div>
+                  <div class="form-group">
+                    <label for="sector">Selecteer actuale risicoclassificatie</label>
+                    <select class="form-control" id="arc">
+                      @foreach ($risicoclassificaties as $risicoclassificatie)  
+                      <option>
+                        {{ $risicoclassificatie->oorzaak_clasificatie}}
+                      </option>
+                      @endforeach
+                    </select>
+                  </div>          
+                    </div> 
+                  </div>
+                  <div class="form-group">
+                    <label for="sector">Selecteer actuale risicoclassificatie</label>
+                    <select class="form-control" id="arc">
+                      @foreach ($risicoclassificaties as $risicoclassificatie)  
+                      <option>
+                        {{ $risicoclassificatie->gerapporteerd_risico}}
+                      </option>
+                      @endforeach
+                    </select>
+                  </div>          
+                    </div> 
+                  </div>
               <div class="form-group">
               <div class="d-flex justify-content-between align-items-center">
                 <input class="form-control" type="text" placeholder="gebruiker" name="gebruiker" required>
               </div>
               <div class="form-group">
-              <div class="d-flex justify-content-between align-items-center">
-                <input class="form-control" type="text" placeholder="status" name="status" required>
+                <label for="sector">Selecteer status</label>
+                <select class="form-control" id="status">
+                  @foreach ($statussen as $status)  
+                  <option>
+                    {{ $status->status}}
+                  </option>
+                  @endforeach
+                </select>
+              </div>          
+                </div> 
               </div>
               <div class="form-group">
-              <div class="d-flex justify-content-between align-items-center">
-                <input class="form-control" type="text" placeholder="sub status" name="s_status" required>
+                <label for="sector">Selecteer sub-status</label>
+                <select class="form-control" id="sub_status">
+                  @foreach ($statussen as $status)  
+                  <option>
+                    {{ $status->substatus}}
+                  </option>
+                  @endforeach
+                </select>
+              </div>          
+                </div> 
               </div>
               <input type="hidden" name="formType" value="createPost">
               <button type="submit" class="btn btn-lg btn-block" style="background:var(--bg-dropdown); color:var(--color-dropdown);" name="submitBtn" value="submitPost"><strong>Maak actie aan</strong></button>
