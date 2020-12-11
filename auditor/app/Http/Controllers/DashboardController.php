@@ -33,6 +33,7 @@ class DashboardController extends Controller
         $_SESSION['role'] = $role; // set a session for easier use
 
         $actions = $this->getActions();
+        $action_owners = $this->getAction_Owners();
         
         // Check if id exists
         if($id){
@@ -40,8 +41,11 @@ class DashboardController extends Controller
             if( $role == "Auditor" ){
                 return view('auditor.dashboard');
             }
-            else if ( $role == "Probleem Eigenaar" ){
-                return view('problem_owner.dashboard');
+            elseif ( $role == "Probleem-Eigenaar" ){
+                return view('problem_owner.dashboard', [
+                    'actions' => $actions,
+                    'action_owners' => $action_owners
+                ]);
             }
             else {
 
@@ -70,6 +74,7 @@ class DashboardController extends Controller
             if( $role == "Auditor" ){
                 
             } 
+            }
             else if ( $role == "Probleem-Eigenaar" ){
                 $action = DB::table('actie')->select('*')->where('probleem_eigenaar_id', $id)->get();
                 return $action;
@@ -79,6 +84,17 @@ class DashboardController extends Controller
                 return $action;
             }
          }
+
+   public function getAction_Owners(){
+            // check which person has the role actie-eigenaar 
+            $action_owners = DB::table('roles')->where('role', 'Actie-Eigenaar')
+                                                ->join('users', 'users.id', '=', 'roles.user_id')
+                                                ->select('users.name')
+                                                ->get();
+            return $action_owners;
    }
 
+   public function sendAction(){
+            
+   }
 }

@@ -5,3 +5,48 @@ header .navbar-nav img{
 .bg-curio{
     background-color: #69197C !important;
 }
+
+
+/* 
+    Action received --problem-owner
+*/
+.action-bg {
+    background-color: rgb(240, 240, 240);
+    
+}
+.action-bg a{
+    text-decoration: none;
+    color: black;
+    
+}
+.--textarea-opmerking {
+    border: 2px solid rgb(224, 224, 224);
+}
+.--list label {
+    width: 100%;
+}
+.--list input[type="checkbox"] {
+    width: 25px;
+    height: 25px;
+}
+.--list {
+    height: 45vh;
+    width: 100%;
+    overflow: scroll;
+    border: 2px solid rgb(240, 240, 240);
+    -webkit-overflow-scrolling: touch;
+    list-style-type: none;
+}
+.--list div:hover {
+    cursor: pointer;
+} 
+.--list {
+    padding: 10px 20px;
+    border-bottom: 1px solid #ccc;
+}
+.--list:last-child {
+    border-bottom: none;
+}
+.--list:nth-child(even) {
+    background: #f8f8f8;
+}

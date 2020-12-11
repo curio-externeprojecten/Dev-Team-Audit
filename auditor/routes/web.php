@@ -14,16 +14,23 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// auth routes & global routes
 Auth::routes();
-
 Route::get('/', [App\Http\Controllers\DashboardController::class, 'dashboard']);
-
 Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'dashboard'])->name('dashboard');
+
 Route::get('/action', [App\Http\Controllers\ActionController::class, 'getAction'])->name('getAction');
 
 //Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'getActions'])->name('dashboard');
 
-Route::get('problem_dashboard', [App\Http\Controllers\DashboardController::class, 'problem_actions']);
+// action received
+Route::get('/received', [App\Http\Controllers\ActionController::class, 'received']);
+Route::post('/received/action', [App\Http\Controllers\ActionController::class, 'action']);
+
+
+Route::get('problem_owner_sended', function(){
+    return view('problem_owner\sended_actions');
+});
 
 Route::get('action_owner', function(){
     return view('action_owner\action');
