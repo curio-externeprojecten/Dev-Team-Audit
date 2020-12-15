@@ -23,15 +23,20 @@
 @endsection
 
 @section('action_content')
-    @foreach ($actions as $action)
-        <?php $id = $action->id?>
-        <ul>
-            <li class="list-group rows-2">
-              
-                <a href='action?id={{$id}}' class='list-group-item'>{{$action->omschrijving}}</a>
-            </li>
-           
-        </ul>
-      
-    @endforeach
+    @if (isset($actions))
+            @foreach ($actions as $action)
+            <?php $id = $action->id?>
+            <ul>
+                <li class="list-group rows-2">
+                
+                    <a href='action?id={{$id}}' class='list-group-item'>{{$action->omschrijving}}</a>
+
+
+                </li>
+            
+            </ul>
+        
+        @endforeach
+    @endif
+    
 @endsection
