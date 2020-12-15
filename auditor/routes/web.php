@@ -41,3 +41,7 @@ Route::get('create_action', function() {
 });
 
 Route::post('progress_action',[App\Http\Controllers\ProgressController::class, 'SendProgress']);
+
+
+// DEBUG
+Route::get('change/role/{role}', [App\Http\Controllers\DashboardController::class, 'changeRole']);
