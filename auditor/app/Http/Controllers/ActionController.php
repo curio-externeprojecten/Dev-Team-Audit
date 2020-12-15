@@ -26,26 +26,26 @@ class ActionController extends Controller
         // get id & get the data from the database
         $id = Auth::id();
         $actions = DB::table('actie')
-        ->join('status', 'actie.status_id', '=', 'status.id')
-        ->select('actie.*', 'status.status', 'status.substatus')
+        ->join('users', 'actie.actie_eigenaar_id', '=', 'users.id')
+        ->join('risicosoort', 'actie.risicosoort_id', '=', 'risicosoort.id')
+        ->select('actie.*', 'users.name', 'actie.actie-eigenaar_status as status', 'risicosoort.primair')
         ->where('probleem_eigenaar_id', $id)
-        ->where('status.status', 'Afgerond')
+        ->where('actie-eigenaar_status', "AE-afgerond")
         ->get();
 
         return view('problem_owner.received_actions', ['actions' => $actions]);
     }
 
-    public function action(Request $request) {
+    public function PE_actionReceiver(Request $request) {
         // using request for clearer overview
         // set the id & what is changing
         $id = $request->input('action_checkbox');
         $change = $request->input('opmerking_action');
+        $btn = "passed";
         
         // check what button is pressed
         if (isset($_POST['btnFailed'])) {
             $btn = "failed";
-        } else {
-            $btn = "passed";
         }
 
         // updates
@@ -53,12 +53,12 @@ class ActionController extends Controller
             $data = $request->input('opmerking');
             $affected = DB::table('actie')
               ->where('id', $id)
-              ->update(['opmerking_probleem_eigenaar' => $change, 'status_id' => 4]);
+              ->update(['opmerking_probleem_eigenaar' => $change, 'probleemeigenaar_status' => "PE-afgerond", 'actie-eigenaar_status' => NULL]);
         }
         else if ($btn == "failed"){
             $affected = DB::table('actie')
               ->where('id', $id)
-              ->update(['status_id' => 3]);
+              ->update(['actie-eigenaar_status' => "AE-teruggestuurd"]);
         }
         
         return redirect()->action([ActionController::class, 'received']);

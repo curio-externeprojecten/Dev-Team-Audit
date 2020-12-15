@@ -76,6 +76,7 @@ class DashboardController extends Controller
             
         }
    }
+   
 
    public function getActions(){
          // db data
@@ -83,11 +84,12 @@ class DashboardController extends Controller
          $role = DB::table('roles')->where('user_id', $id)->value('role');
          $_SESSION['role'] = $role; // set a session for easier use
 
-         if($id){
+        if($id){
               // Check what role the user has so we can send all the right actions to the desired person
             if( $role == "Auditor" ){
                 
-            } 
+            }
+            
             else if ( $role == "Probleem-Eigenaar" ){
                 $action = DB::table('actie')->select('*')->where('probleem_eigenaar_id', $id)->get();
                 return $action;
@@ -98,7 +100,6 @@ class DashboardController extends Controller
             }
          }
     }
-    
    public function getAction_Owners(){
             // check which person has the role actie-eigenaar 
             $action_owners = DB::table('roles')->where('role', 'Actie-Eigenaar')
@@ -107,4 +108,16 @@ class DashboardController extends Controller
                                                 ->get();
             return $action_owners;
    }
+
+   public function changeRole($role){
+        $id = Auth::id();
+        
+        try {
+            $change = \DB::table('roles')->where('user_id', $id)->update(['role' => $role]); 
+        } catch (\Exception $e) {
+            return redirect()->action([DashboardController::class, 'dashboard']);
+        }
+        return redirect()->action([DashboardController::class, 'dashboard']);
+    }
+
 }

@@ -25,7 +25,7 @@ Route::get('/action', [App\Http\Controllers\ActionController::class, 'getAction'
 
 // action received
 Route::get('/received', [App\Http\Controllers\ActionController::class, 'received']);
-Route::post('/received/action', [App\Http\Controllers\ActionController::class, 'action']);
+Route::post('/received/action', [App\Http\Controllers\ActionController::class, 'PE_actionReceiver']);
 
 // change owner from action problem_owner
 Route::post('actions/change_owner', [App\Http\Controllers\ActionController::class, 'sendAction'] )->name('actions.change_owner');
@@ -38,4 +38,12 @@ Route::get('action_owner', function(){
     return view('action_owner\action');
 });
 
+Route::get('create_action', function() {
+    return view('auditor.create_action');
+});
 
+Route::post('progress_action',[App\Http\Controllers\ProgressController::class, 'SendProgress']);
+
+
+// DEBUG
+Route::get('change/role/{role}', [App\Http\Controllers\DashboardController::class, 'changeRole']);
