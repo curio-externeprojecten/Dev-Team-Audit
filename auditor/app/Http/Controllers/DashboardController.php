@@ -111,20 +111,14 @@ class DashboardController extends Controller
    }
 
    public function changeRole($role){
-    $id = Auth::id();
-    if($role == "Auditor"){
-        \DB::table('roles')->where('user_id', $id)
-        ->update(['role' => "Auditor"]); 
+        $id = Auth::id();
+        
+        try {
+            $change = \DB::table('roles')->where('user_id', $id)->update(['role' => $role]); 
+        } catch (\Exception $e) {
+            return redirect()->action([DashboardController::class, 'dashboard']);
+        }
+        return redirect()->action([DashboardController::class, 'dashboard']);
     }
-    if($role == "ProblemOwner"){
-        \DB::table('roles')->where('user_id', $id)
-        ->update(['role' => "Probleem-Eigenaar"]); 
-    }
-    if($role == "ActionOwner"){
-        \DB::table('roles')->where('user_id', $id)
-        ->update(['role' => "Actie-Eigenaar"]); 
-    }
-    return redirect()->action([DashboardController::class, 'dashboard']);
-}
 
 }

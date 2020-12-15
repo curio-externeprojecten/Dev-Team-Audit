@@ -52,10 +52,10 @@
                                 <a class="dropdown-item" href="change/role/Auditor">
                                     Make auditor
                                 </a>
-                                <a class="dropdown-item" href="change/role/ProblemOwner">
+                                <a class="dropdown-item" href="change/role/Probleem-Eigenaar">
                                     Make problem owner
                                 </a>
-                                <a class="dropdown-item" href="change/role/ActionOwner">
+                                <a class="dropdown-item" href="change/role/Actie-Eigenaar">
                                     Make action owner
                                 </a>
                                 <a class="dropdown-item" href="{{ route('logout') }}"
