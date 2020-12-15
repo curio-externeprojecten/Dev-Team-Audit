@@ -13,7 +13,6 @@ class ActionController extends Controller
                 $role = DB::table('roles')->where('user_id', $userId)->value('role');
                 $_SESSION['role'] = $role; // set a session for easier use
 
-
                 $actionID = $_GET['id'];
 
                 $action = DB::table('actie')->where('id', $actionID)->get();
@@ -64,4 +63,17 @@ class ActionController extends Controller
         
         return redirect()->action([ActionController::class, 'received']);
     }
+
+    public function sendAction(Request $request){
+        $id = Auth::id();
+
+        if (isset($request->actions)) {
+            $action_owner_id = $request->input('actie_eigenaar_id');
+
+            $send_action = DB::table('actie')->where('id', $request->actions)
+                                             ->update(['actie_eigenaar_id' => $action_owner_id]);
+        }
+
+        return redirect('dashboard');
+    }   
 }

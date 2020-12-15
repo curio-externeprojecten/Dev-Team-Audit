@@ -27,9 +27,11 @@ Route::get('/action', [App\Http\Controllers\ActionController::class, 'getAction'
 Route::get('/received', [App\Http\Controllers\ActionController::class, 'received']);
 Route::post('/received/action', [App\Http\Controllers\ActionController::class, 'action']);
 
+// change owner from action problem_owner
+Route::post('actions/change_owner', [App\Http\Controllers\ActionController::class, 'sendAction'] )->name('actions.change_owner');
 
-Route::get('problem_owner_sended', function(){
-    return view('problem_owner\sended_actions');
+Route::get('problem_owner_dashboard', function(){
+    return view('problem_owner\dashboard');
 });
 
 Route::get('action_owner', function(){

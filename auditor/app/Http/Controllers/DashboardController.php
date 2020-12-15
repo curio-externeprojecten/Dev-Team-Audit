@@ -41,13 +41,13 @@ class DashboardController extends Controller
       $users = \DB::table('users')->where('name')->get();
       $statussen = \DB::table('status')->get();
 
-      return view('auditor.create_action' , [
-          'sectors' => $sectors,
-          'risicosoorten' => $risicosoorten,
-          'risicoclassificaties' => $risicoclassificaties,
-          'users' => $users,
-          'statussen' => $statussen
-      ]);
+    //   return view('auditor.create_action' , [
+    //       'sectors' => $sectors,
+    //       'risicosoorten' => $risicosoorten,
+    //       'risicoclassificaties' => $risicoclassificaties,
+    //       'users' => $users,
+    //       'statussen' => $statussen
+    //   ]);
 
         // Check if id exists
         if($id){
@@ -88,7 +88,6 @@ class DashboardController extends Controller
             if( $role == "Auditor" ){
                 
             } 
-            }
             else if ( $role == "Probleem-Eigenaar" ){
                 $action = DB::table('actie')->select('*')->where('probleem_eigenaar_id', $id)->get();
                 return $action;
@@ -98,15 +97,14 @@ class DashboardController extends Controller
                 return $action;
             }
          }
-
+    }
+    
    public function getAction_Owners(){
             // check which person has the role actie-eigenaar 
             $action_owners = DB::table('roles')->where('role', 'Actie-Eigenaar')
                                                 ->join('users', 'users.id', '=', 'roles.user_id')
-                                                ->select('users.name')
+                                                ->select('users.name', 'users.id')
                                                 ->get();
             return $action_owners;
    }
-
-
 }
