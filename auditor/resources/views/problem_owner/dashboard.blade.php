@@ -2,7 +2,7 @@
 
 
 @section('title')
-    
+    Homepagina
 @endsection
 
 @section('header')
@@ -11,7 +11,7 @@
                 <a class="nav-link" href="dashboard">Homepagina</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " href="problem_owner_sended">Toegewezen acties</a>
+                <a class="nav-link " href="/problem_owner_sended">Toegewezen acties</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link " href="/received">Terug ontvangen acties</a>
@@ -20,7 +20,7 @@
 @endsection
 
 @section('content')
-    <div class="actions">
+    <div class="actions container">
         <form action="{{ route('actions.change_owner') }}" method="post">
             @csrf
             <div class="modal fade" id="successModalCenter" tabindex="-1" role="dialog" aria-labelledby="successModalCenterTitle" aria-hidden="true">
@@ -41,7 +41,7 @@
             </div>
 
             <div class="d-flex m-2">
-                <div class="m-2">
+                <div class="m-2 mr-auto">
                     <h2>Eigen acties:</h2>
                 </div>
             
@@ -54,23 +54,24 @@
                         @endforeach
                     </select>
                 </div>
-            
-                <div>
-                    <button type="button" class="btn btn-primary m-2" data-toggle="modal" data-target="#successModalCenter">
-                        Doorsturen
+
+                <div class="m-2">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#successModalCenter">
+                        Actie doorsturen
                     </button>
                 </div>
             </div>
-
+            
                 <ul class="list-group">
                     @foreach ($actions as $action)
                         @if ($action->actie_eigenaar_id == null)
                             <li class="list-group-item">
                                 <div class="form-check">
+                                    <?php $id = $action->id?>
                                     <input class="m-2" type="checkbox" value="{{ $action->id }}" name="actions[]" class="problem_owner_checkbox" id="problem_owner_checkbox">
-                                    <a href="">{{ $action->omschrijving }}</a>
+                                    <a href="action?id={{$id}}" class="btn btn-outline-secondary">{{ $action->omschrijving }}</a>
                                 </div>
-                            </li>
+                            </li> 
                         @endif
                     @endforeach
                 </ul>

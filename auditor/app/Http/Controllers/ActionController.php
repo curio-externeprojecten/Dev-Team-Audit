@@ -65,8 +65,9 @@ class ActionController extends Controller
     }
 
     public function sendAction(Request $request){
-        $id = Auth::id();
+        // send action from problem_owner to action_owner
 
+        // checks if any action is checked in checkbox
         if (isset($request->actions)) {
             $action_owner_id = $request->input('actie_eigenaar_id');
 
@@ -75,5 +76,17 @@ class ActionController extends Controller
         }
 
         return redirect('dashboard');
+    }   
+
+    public function sendedActions(){
+                $id = Auth::id(); 
+
+                $actions = DB::table('actie')
+                ->where('probleem_eigenaar_id', $id)
+                ->get();
+
+                return view('problem_owner.sended_actions', [
+                    'actions' => $actions
+                ]);;
     }   
 }
