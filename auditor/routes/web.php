@@ -37,9 +37,7 @@ Route::get('action_owner', function(){
     return view('action_owner\action');
 });
 
-Route::get('create_action', function() {
-    return view('auditor.create_action');
-});
+Route::get('action/create', [App\Http\Controllers\ActionController::class, 'createActionPage']);
 
 Route::post('progress_action',[App\Http\Controllers\ProgressController::class, 'SendProgress']);
 
