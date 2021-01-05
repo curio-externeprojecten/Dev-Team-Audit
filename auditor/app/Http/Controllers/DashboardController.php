@@ -113,7 +113,7 @@ class DashboardController extends Controller
         $id = Auth::id();
         
         try {
-            $change = \DB::table('roles')->where('user_id', $id)->update(['role' => $role]); 
+            $change = DB::table('roles')->where('user_id', $id)->update(['role' => $role]); 
         } catch (\Exception $e) {
             return redirect()->action([DashboardController::class, 'dashboard']);
         }
