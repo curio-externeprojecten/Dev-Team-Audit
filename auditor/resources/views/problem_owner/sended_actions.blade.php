@@ -14,7 +14,7 @@
                 <a class="nav-link " href="problem_owner_sended">Toegewezen acties</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " href="problem_owner_received">Terug ontvangen acties</a>
+                <a class="nav-link " href="/received">Terug ontvangen acties</a>
             </li>
         </div>
 @endsection
