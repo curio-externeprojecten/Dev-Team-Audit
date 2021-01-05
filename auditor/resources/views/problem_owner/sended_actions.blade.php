@@ -14,7 +14,7 @@
                 <a class="nav-link " href="problem_owner_sended">Toegewezen acties</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " href="problem_owner_received">Terug ontvangen acties</a>
+                <a class="nav-link " href="/received">Terug ontvangen acties</a>
             </li>
         </div>
 @endsection
@@ -31,6 +31,7 @@
                         <li class="list-group-item">
                             <div class="form-check">
                                 <?php $id = $action->id?>
+                                <p>Actie toegewezen aan: {{ $action->name }}</p>
                                 <a href="action?id={{$id}}" class="btn btn-outline-secondary">{{ $action->omschrijving }}</a>
                             </div>
                         </li>
