@@ -17,6 +17,8 @@ class ProgressController extends Controller
          ->where('id', $id)
          ->update(['voortgang' => $data]);
 
+         $secondChange = DB::table('actie')->where('id', $id)->update(['actie-eigenaar_status', 'AE-afgerond']);
+
         // return view("action_owner.action?id='$id'");
         return redirect()->back();
     }

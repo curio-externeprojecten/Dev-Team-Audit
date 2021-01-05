@@ -79,18 +79,19 @@
 
         </button>
     </div> --}}
-    <form action="/received/action" method="POST">
+    <form action="{{url('finish_action')}}" method="POST">
         @csrf
+        <input type="hidden" value="{{$action[0]->id}}" name="action_id">
         <div>
-            <div class="form-group mt-3">
+            {{-- <div class="form-group mt-3 ml-3 mr-3">
                 <h3><b>Opmerking</b></h3>
                 <textarea class="w-100 --textarea-opmerking form-control" name="opmerking_action" id="opmerking_action" cols="30" rows="10" required></textarea>
-            </div>
+            </div> --}}
         </div>
     
         <div class="d-flex justify-content-around">
-            <input type="submit" name="btnCorrect" class="btn btn-primary m-2 w-50" value="Doorsturen">
-            <input type="submit" name="btnFailed" class="btn btn-primary m-2 w-50" value="Terugsturen">
+            
+            <input type="submit" name="finish_action" class="btn btn-primary m-2 w-50" value="Afronden">
         </div>
     </form>
 

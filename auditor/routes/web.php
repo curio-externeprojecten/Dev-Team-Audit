@@ -41,3 +41,5 @@ Route::get('create_action', function() {
 });
 
 Route::post('progress_action',[App\Http\Controllers\ProgressController::class, 'SendProgress']);
+
+Route::post('finish_action', [App\Http\Controllers\StatusController::class, 'FinishAction']);
