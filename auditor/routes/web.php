@@ -25,21 +25,23 @@ Route::get('/action', [App\Http\Controllers\ActionController::class, 'getAction'
 
 // action received
 Route::get('/received', [App\Http\Controllers\ActionController::class, 'received']);
-Route::post('/received/action', [App\Http\Controllers\ActionController::class, 'action']);
+Route::post('/received/action', [App\Http\Controllers\ActionController::class, 'PE_actionReceiver']);
 
+// change owner from action problem_owner
+Route::post('actions/change_owner', [App\Http\Controllers\ActionController::class, 'sendAction'] )->name('actions.change_owner');
 
-Route::get('problem_owner_sended', function(){
-    return view('problem_owner\sended_actions');
-});
+// sended actions from problem_owner to action_owner
+Route::get('/problem_owner_sended', [App\Http\Controllers\ActionController::class, 'sendedActions'])->name('sendedActions');
 
 Route::get('action_owner', function(){
     return view('action_owner\action');
 });
 
-Route::get('create_action', function() {
-    return view('auditor.create_action');
-});
+Route::get('action/create', [App\Http\Controllers\ActionController::class, 'createActionPage']);
 
 Route::post('progress_action',[App\Http\Controllers\ProgressController::class, 'SendProgress']);
 
 Route::post('finish_action', [App\Http\Controllers\StatusController::class, 'FinishAction']);
+
+// DEBUG
+Route::get('change/role/{role}', [App\Http\Controllers\DashboardController::class, 'changeRole']);

@@ -1,24 +1,12 @@
 @extends('layouts.master')
 
-@section('header')
-    <div class="d-flex align-items-center">
-        <li class="nav-item">
-            <a class="nav-link" href="dashboard">Homepagina</a>
-        </li>
-        
-      
-    </div>
-@endsection
 
 @section('title')
     
 @endsection
 
 @section('content')
-<div class="head">
-    <h1 class=" d-flex justify-content-center">action owner</h1>
-</div>
-
+    <h1>action owner</h1>
 
 @endsection
 

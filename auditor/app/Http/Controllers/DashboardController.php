@@ -100,15 +100,24 @@ class DashboardController extends Controller
             }
          }
     }
-
    public function getAction_Owners(){
             // check which person has the role actie-eigenaar 
             $action_owners = DB::table('roles')->where('role', 'Actie-Eigenaar')
                                                 ->join('users', 'users.id', '=', 'roles.user_id')
-                                                ->select('users.name')
+                                                ->select('users.name', 'users.id')
                                                 ->get();
             return $action_owners;
    }
 
+   public function changeRole($role){
+        $id = Auth::id();
+        
+        try {
+            $change = \DB::table('roles')->where('user_id', $id)->update(['role' => $role]); 
+        } catch (\Exception $e) {
+            return redirect()->action([DashboardController::class, 'dashboard']);
+        }
+        return redirect()->action([DashboardController::class, 'dashboard']);
+    }
 
 }

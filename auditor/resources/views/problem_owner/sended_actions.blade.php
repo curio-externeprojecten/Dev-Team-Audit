@@ -2,7 +2,7 @@
 
 
 @section('title')
-    
+    Toegewezen acties
 @endsection
 
 @section('header')
@@ -20,5 +20,22 @@
 @endsection
 
 @section('content')
+    <div class="actions container">
+            <div class="m-2">
+                <h2>Toegewezen acties:</h2>
+            </div>
 
+            <ul class="list-group">
+                @foreach ($actions as $action)
+                    @if ($action->actie_eigenaar_id != null)
+                        <li class="list-group-item">
+                            <div class="form-check">
+                                <?php $id = $action->id?>
+                                <a href="action?id={{$id}}" class="btn btn-outline-secondary">{{ $action->omschrijving }}</a>
+                            </div>
+                        </li>
+                    @endif 
+                @endforeach
+            </ul>
+    </div>
 @endsection
