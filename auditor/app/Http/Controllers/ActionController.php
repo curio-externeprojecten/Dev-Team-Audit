@@ -110,8 +110,11 @@ class ActionController extends Controller
     public function sendedActions(){
                 $id = Auth::id(); 
 
+                // shows all actions sended by the problem_owner to an action_owner with their info.
                 $actions = DB::table('actie')
                 ->where('probleem_eigenaar_id', $id)
+                ->join('users', 'users.id', '=', 'actie.actie_eigenaar_id')
+                ->select('users.name', 'users.id', 'actie_eigenaar_id', 'omschrijving')
                 ->get();
 
                 return view('problem_owner.sended_actions', [

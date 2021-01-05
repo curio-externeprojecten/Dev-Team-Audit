@@ -31,6 +31,7 @@
                         <li class="list-group-item">
                             <div class="form-check">
                                 <?php $id = $action->id?>
+                                <p>Actie toegewezen aan: {{ $action->name }}</p>
                                 <a href="action?id={{$id}}" class="btn btn-outline-secondary">{{ $action->omschrijving }}</a>
                             </div>
                         </li>
