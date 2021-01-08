@@ -7,17 +7,17 @@ use Illuminate\Support\Facades\DB;
 
 class ProgressController extends Controller
 {
-    function SendProgress(Request $request){
-       
+    function SendProgress(Request $request, $id){
+
         
-        $id = $request->input('action_id');
-        $action = DB::table('actie')->where('id', $id);
-         $data = $request->input('progress_action');
-         $change = DB::table('actie')
+        // $id = $request->input('action_id');
+        $data = $request->input('progress_action');
+
+        //$action = DB::table('actie')->where('id', $id);
+         //$data = $request->input('progress_action');
+         DB::table('actie')
          ->where('id', $id)
          ->update(['voortgang' => $data]);
-
-         $secondChange = DB::table('actie')->where('id', $id)->update(['actie-eigenaar_status', 'AE-afgerond']);
 
         // return view("action_owner.action?id='$id'");
         return redirect()->back();

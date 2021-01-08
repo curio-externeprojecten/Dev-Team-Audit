@@ -14,12 +14,12 @@ class ActionController extends Controller
                 $_SESSION['role'] = $role; // set a session for easier use
 
                 $actionID = $_GET['id'];
-
+            
                 $action = DB::table('actie')
                 ->join('sector', 'actie.sector_id' ,'=', 'sector.id' )
                 ->join('risicosoort', 'actie.risicosoort_id', '=', 'risicosoort.id')
                 ->join('risicoclassificatie', 'actie.risicoclassificatie_id', '=', 'risicoclassificatie.id')
-                ->join('users', 'actie.probleem_eigenaar_id', '=', 'users.id')
+                ->join('users', 'actie.probleem_eigenaar_id', '=', 'users.id')->select('*', 'actie.id')
                 ->where('actie.id', $actionID)->get();
 
                 $actionOwner = DB::table('actie')->join('users', 'actie.actie_eigenaar_id', '=', 'users.id')->where('actie.id', $actionID)->get();
@@ -114,4 +114,22 @@ class ActionController extends Controller
             'statussen' => $statussen
         ]);
     }
+
+    // Method to update an comment to an action (ACTION OWNER COMMENT)
+
+    public function UpdateComment(Request $request, $id){
+            // $id = $request->input('action_id');
+            $data = $request->input('comment_action');
+      
+            //$action = DB::table('actie')->where('id', $id);
+             //$data = $request->input('progress_action');
+             DB::table('actie')
+             ->where('id', $id)
+             ->update(['opmerking_actie_eigenaar' => $data]);
+            
+            // return view("action_owner.a
+            return redirect()->back();
+    }
+
+
 }

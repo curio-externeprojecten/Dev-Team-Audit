@@ -39,9 +39,16 @@ Route::get('action_owner', function(){
 
 Route::get('action/create', [App\Http\Controllers\ActionController::class, 'createActionPage']);
 
-Route::post('progress_action',[App\Http\Controllers\ProgressController::class, 'SendProgress']);
+
+// ROUTE FOR: UPDATE PROGRESS 
+Route::put('progress_action/{id}',[App\Http\Controllers\ProgressController::class, 'SendProgress'])->name('progress.action');
+
+// ROUTE FOR: UPDATE COMMENT
+Route::put('comment_action/{id}', [App\Http\Controllers\ActionController::class, 'UpdateComment'])->name('comment.action');
 
 Route::post('finish_action', [App\Http\Controllers\StatusController::class, 'FinishAction']);
 
 // DEBUG
 Route::get('change/role/{role}', [App\Http\Controllers\DashboardController::class, 'changeRole']);
+
+Route::post('voortgang_action', [App\Http\Controllers\ProgressController::class, 'UpdateVoortgang'])->name('action.voortgang');

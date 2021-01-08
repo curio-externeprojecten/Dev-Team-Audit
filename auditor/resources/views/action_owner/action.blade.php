@@ -5,46 +5,16 @@
     
 @endsection
 
+@section('header')
+<div class="d-flex align-items-center">
+    
+        <a class="nav-link" href="dashboard">Homepagina</a>
+    
+</div>
+@endsection
+
 @section('content')
-    {{-- <h1>This is the action owner actionpage!</h1> --}}
 
-    {{-- //<p class="list-group">{{$action}}</p> --}}
-
-    @php
-        // var_dump($action);
-        $schemes = Schema::getColumnListing('actie');
-     
-        $i = 1;
-
-       // $indexesFound = $schemes->listTableIndexes('voortgang')
-
-       $names = [
-
-           'Datum Ontstaan',
-           'Audit Oordeel IA',
-           'Process',
-           'Omschrijving',
-           'Risicosoort',
-           'RisicoClassificatie',
-           'Aanbeveling Internal Audit',
-           'Datum Deadline',
-           'Voortgang',
-           'Bron Detail',
-           'Sector',
-           'Bevinding',
-           'Situatie',
-           'Risico Beschrijving',
-           'Oorzaak',
-           'Management Actie Plan',
-           'Deadline Bijgesteld',
-           'Probleem Eigenaar',
-           'Status',
-           'Aantekening IA',
-           
-       ];
-
-    @endphp
-        
       <ul class="row list-unstyled pr-5 pt-5">
 
         <li class="bd-highlight border col-5 ml-5">
@@ -270,28 +240,63 @@
 
          </li>
 
-       
+         <li class="bd-highlight border col-5 ml-5">
+            
+            <p class="text-info font-weight-bold">
+                Huidige Voortgang
+                <p>{{$action[0]->voortgang}}</p>
+            </p>
 
+         </li>
+
+         <li class="bd-highlight border col-5 ml-5">
+            
+            <p class="text-info font-weight-bold">
+                Huidige Opmerking Actie Eigenaar
+                <p>{{$action[0]->opmerking_actie_eigenaar}}</p>
+            </p>
+
+         </li>
 
         
 
             <li class="bd-highlight border col-5 ml-5">
 
-                    <form action="{{url('progress_action')}}" method="POST">
-                        <input type="hidden" value="{{$action[0]->id}}" name="action_id">
+            <div class="form-group d-flex justify-content-around">
+
+                {{-- <form action="{{url('progress_action')}}" method="POST"> --}}
+           <form action="{{route('progress.action', $action[0]->id)}}" method="POST">
+            @method('PUT')
+                    {{-- <input type="hidden" value="{{$action[0]->id}}" name="action_id"> --}}
+                        @csrf
+                        <div class="pt-2 ">   
+                            <span class="help-block border border-info rounded">Voortgang.</span>
+                        </div>
+            
+                            <br></br>
+                            <div class="form">
+                                <textarea cols="40" rows="5" name="progress_action"></textarea> {{-- Text area om te verzenden!--}}
+                            </div>
+                            <input type="submit" value="Verzend Voortgang">
+                    </form>
+   
+                    <form action="{{route('comment.action', $action[0]->id)}}" method="POST">
+                        @method('PUT')
                             @csrf
                             <div class="pt-2 ">   
-                                <span class="help-block border border-info rounded">Omschrijf hieronder uw huidige voortgang.</span>
+                                <span class="help-block border border-info rounded">Opmerking.</span>
                             </div>
                 
                                 <br></br>
                                 <div class="form">
-                                    <textarea cols="40" rows="5" name="progress_action"></textarea> {{-- Text area om te verzenden!--}}
+                                    <textarea cols="40" rows="5" name="comment_action"></textarea> 
                                 </div>
-                                <input type="submit">
+                                <input type="submit" value="Verzend Opmerking">
                         </form>
-       
-             
+
+            </div>
+                    
+           
             </li>
  
     </ul>

@@ -41,14 +41,6 @@ class DashboardController extends Controller
       $users = DB::table('users')->where('name')->get();
       $statussen = DB::table('status')->get();
 
-    //   return view('auditor.create_action' , [
-    //       'sectors' => $sectors,
-    //       'risicosoorten' => $risicosoorten,
-    //       'risicoclassificaties' => $risicoclassificaties,
-    //       'users' => $users,
-    //       'statussen' => $statussen
-    //   ]);
-
         // Check if id exists
         if($id){
             // Check what role the user has so we can relocate him to the right dashboard
@@ -91,15 +83,20 @@ class DashboardController extends Controller
             }
             
             else if ( $role == "Probleem-Eigenaar" ){
-                $action = DB::table('actie')->select('*')->where('probleem_eigenaar_id', $id)->get();
-                return $action;
+                $actions = DB::table('actie')->select('*')->where('probleem_eigenaar_id', $id)->get();
+                return $actions;
             }
-            else {
-                $action = DB::table('actie')->select('*')->where('actie_eigenaar_id', $id)->get();
-                return $action;
+            else {  
+               // @if($action->actie_eigenaar_status == null || $action->actie_eigenaar_status == 'AE-teruggestuurd')
+       
+                $actions = DB::table('actie')->select('*')->where('actie_eigenaar_id', $id)
+                ->where('actie_eigenaar_status', 'AE-teruggestuurd')->orWhere('actie_eigenaar_status', null)->get();
+
+                return $actions;
             }
          }
     }
+    
    public function getAction_Owners(){
             // check which person has the role actie-eigenaar 
             $action_owners = DB::table('roles')->where('role', 'Actie-Eigenaar')
