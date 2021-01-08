@@ -37,10 +37,13 @@ class ActionController extends Controller
         $actions = DB::table('actie')
         ->join('users', 'actie.actie_eigenaar_id', '=', 'users.id')
         ->join('risicosoort', 'actie.risicosoort_id', '=', 'risicosoort.id')
-        ->select('actie.*', 'users.name', 'actie.actie_eigenaar_status as status', 'risicosoort.primair')
+        ->select('actie.*', 'users.name', 'actie.actie_eigenaar_status as AE_status', 'actie.probleemeigenaar_status as PE_status', 'risicosoort.primair')
         ->where([
             ['probleem_eigenaar_id', $id],
             ['actie_eigenaar_status', "AE-afgerond"],
+        ])->orWhere([
+            ['probleem_eigenaar_id', $id],
+            ['probleemeigenaar_status', "PE-teruggestuurd"],
         ])->get();
 
         return view('problem_owner.received_actions', ['actions' => $actions]);
@@ -63,12 +66,12 @@ class ActionController extends Controller
             $data = $request->input('opmerking');
             $affected = DB::table('actie')
               ->where('id', $id)
-              ->update(['opmerking_probleem_eigenaar' => $change, 'probleemeigenaar_status' => "PE-afgerond", 'actie-eigenaar_status' => NULL]);
+              ->update(['opmerking_probleem_eigenaar' => $change, 'probleemeigenaar_status' => "PE-afgerond", 'actie_eigenaar_status' => NULL]);
         }
         else if ($btn == "failed"){
             $affected = DB::table('actie')
               ->where('id', $id)
-              ->update(['actie-eigenaar_status' => "AE-teruggestuurd"]);
+              ->update(['actie_eigenaar_status' => "AE-teruggestuurd"]);
         }
         
         return redirect()->action([ActionController::class, 'received']);

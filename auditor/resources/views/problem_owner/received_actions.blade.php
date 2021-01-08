@@ -21,7 +21,7 @@
 
 @section('content')
 <div class="container">
-    <form action="/received/action" method="POST">
+    <form action="{{route('PE_receivedAction')}}" method="POST">
         @csrf
 
         <div>
@@ -34,7 +34,12 @@
                             <div class="p-3 w-100">
                                 <div class="d-flex p-2 action-bg justify-content-between">
                                     <div><strong>{{ ucwords($action->bron_detail) }}</strong></div>
-                                    <div><span class="badge badge-danger">{{ $action->status }}</span></div>
+                                    @if (!empty($action->PE_status) && empty($action->AE_status))
+                                        <div><span class="badge badge-danger">{{ $action->PE_status }}</span></div>
+                                    @endif
+                                    @if (empty($action->PE_status) && !empty($action->AE_status))
+                                        <div><span class="badge badge-danger">{{ $action->AE_status }}</span></div>
+                                    @endif
                                 </div>
                                 <div class="pt-2 pl-2" style="background:white;">
                                     <div class="d-flex justify-content-between align-items-center">
@@ -42,7 +47,7 @@
                                         <span class="badge badge-primary mr-2">{{ $action->primair }}</span>
                                     </div>                                    
                                     <p class="m-0 p-0">Deadline: {{ $action->datum_deadline }}</p>
-                                    <a href="/received/action/{{ $action->id }}" class="btn btn-sm btn-primary mt-2 mb-2">Bekijk actie</a>
+                                    <a href="{{route('PE_receivedShowAction', $action->id)}}" class="btn btn-sm btn-primary mt-2 mb-2">Bekijk actie</a>
                                 </div>
                             </div>
                         </li>
