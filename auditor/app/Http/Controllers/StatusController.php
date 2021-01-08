@@ -12,10 +12,10 @@ class StatusController extends Controller
         
         $id = $request->input('action_id');
        //$action = DB::table('actie')->where('id', $id);
-         $data = $request->input('finish_action');
-         $change = DB::table('actie')
-          ->where('id', $id)
-          ->update(['voortgang' => $data]);
+        //  $data = $request->input('finish_action');
+        // //  $change = DB::table('actie')
+        // //   ->where('id', $id)
+        // //   ->update(['voortgang' => $data]);
 
          $secondChange = DB::table('actie')->where('id', $id)->update(['actie_eigenaar_status' => 'AE-afgerond']); // Update the status to send the action to the problem owner
 
