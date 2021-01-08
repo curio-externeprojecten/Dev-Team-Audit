@@ -20,9 +20,9 @@ class ActionController extends Controller
                 ->join('risicosoort', 'actie.risicosoort_id', '=', 'risicosoort.id')
                 ->join('risicoclassificatie', 'actie.risicoclassificatie_id', '=', 'risicoclassificatie.id')
                 ->join('users', 'actie.probleem_eigenaar_id', '=', 'users.id')->select('*', 'actie.id')
-                ->where('actie.id', $actionID)->get();
+                ->where('actie.id', $actionID)->first();
 
-                $actionOwner = DB::table('actie')->join('users', 'actie.actie_eigenaar_id', '=', 'users.id')->where('actie.id', $actionID)->get();
+                $actionOwner = DB::table('actie')->join('users', 'actie.actie_eigenaar_id', '=', 'users.id')->where('actie.id', $actionID)->first();
                 
                 return view('action_owner.action', [
                     'action' => $action,
@@ -82,7 +82,7 @@ class ActionController extends Controller
         ->join('risicoclassificatie', 'actie.risicoclassificatie_id', '=', 'risicoclassificatie.id')
         ->join('users', 'actie.probleem_eigenaar_id', '=', 'users.id')
         ->join('status', 'actie.status_id', '=', 'status.id')
-        ->where('actie.id', $id)->get();
+        ->where('actie.id', $id)->first();
 
         $actionOwner = DB::table('actie')->join('users', 'actie.actie_eigenaar_id', '=', 'users.id')->where('actie.id', $id)->get();
         
@@ -95,7 +95,7 @@ class ActionController extends Controller
 
     public function sendAction(Request $request){
         // send action from problem_owner to action_owner
-
+        
         // checks if any action is checked in checkbox
         if (isset($request->actions)) {
             $action_owner_id = $request->input('actie_eigenaar_id');
@@ -114,14 +114,13 @@ class ActionController extends Controller
                 $actions = DB::table('actie')
                 ->where('probleem_eigenaar_id', $id)
                 ->join('users', 'users.id', '=', 'actie.actie_eigenaar_id')
-                ->select('users.name', 'users.id', 'actie_eigenaar_id', 'omschrijving', 'actie_eigenaar_status', 
-                'voortgang', 'datum_deadline', 'deadline_bijgesteld', 'audit_oordeel_ia', 'bron_detail')
+                ->select('users.name', 'actie.*')
                 ->get();
                 
 
                 return view('problem_owner.sended_actions', [
                     'actions' => $actions
-                ]);;
+                ]);
     }   
 
     public function createActionPage(){

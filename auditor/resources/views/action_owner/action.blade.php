@@ -14,14 +14,13 @@
 @endsection
 
 @section('content')
-
       <ul class="row list-unstyled pr-5 pt-5">
 
         <li class="bd-highlight border col-5 ml-5">
             
             <p class="text-info font-weight-bold">
                 Datum Ontstaan
-                <p>{{$action[0]->datum_ontstaan}}</p>
+                <p>{{$action->datum_ontstaan}}</p>
             </p>
 
         </li>
@@ -30,7 +29,7 @@
             
             <p class="text-info font-weight-bold">
                 Audit Oordeel IA
-                <p>{{$action[0]->audit_oordeel_ia}}</p>
+                <p>{{$action->audit_oordeel_ia}}</p>
             </p>
 
         </li>
@@ -39,7 +38,7 @@
             
             <p class="text-info font-weight-bold">
                 Process
-                <p> {{$action[0]->proces}}</p>
+                <p> {{$action->proces}}</p>
             </p>
 
         </li>
@@ -48,7 +47,7 @@
             
             <p class="text-info font-weight-bold">
                 Omschrijving
-                <p> {{$action[0]->omschrijving}}</p>
+                <p> {{$action->omschrijving}}</p>
             </p>
 
         </li>
@@ -59,12 +58,12 @@
                 Risicosoort
 
                 <div class="d-flex">
-                    <p class="text-danger">Primair: </p> <p class="pl-1"> {{$action[0]->primair}}</p>
+                    <p class="text-danger">Primair: </p> <p class="pl-1"> {{$action->primair}}</p>
                 </div>
 
                 <div class="d-flex">
 
-                    <p class="text-danger">Secundair: </p> <p class="pl-1">{{$action[0]->secundair}}</p>
+                    <p class="text-danger">Secundair: </p> <p class="pl-1">{{$action->secundair}}</p>
 
                 </div>
              
@@ -78,16 +77,16 @@
                 RisicoClassificatie
 
                 <div class="d-flex">
-                    <p class="text-danger">Actuele Risicoclassificatie ia: </p> <p class="pl-1"> {{$action[0]->actuele_risicoclassificatie_ia}}</p>
+                    <p class="text-danger">Actuele Risicoclassificatie ia: </p> <p class="pl-1"> {{$action->actuele_risicoclassificatie_ia}}</p>
                 </div>
 
                 <div class="d-flex">
 
-                    <p class="text-danger">Oorzaak Classificatie: </p> <p class="pl-1">{{$action[0]->oorzaak_clasificatie}}</p>
+                    <p class="text-danger">Oorzaak Classificatie: </p> <p class="pl-1">{{$action->oorzaak_clasificatie}}</p>
 
                 </div>
                 <div class="d-flex">
-                    <p class="text-danger">Gerapporteerd Risico:</p> <p class="pl-1">{{$action[0]->gerapporteerd_risico}}</p>
+                    <p class="text-danger">Gerapporteerd Risico:</p> <p class="pl-1">{{$action->gerapporteerd_risico}}</p>
                 </div>
             </p>
 
@@ -97,7 +96,7 @@
             
             <p class="text-info font-weight-bold">
                 Aanbeveling Internal Audit
-                <p>{{$action[0]->aanbeveling_internal_audit}}</p>
+                <p>{{$action->aanbeveling_internal_audit}}</p>
             </p>
 
          </li>
@@ -106,7 +105,7 @@
             
             <p class="text-info font-weight-bold">
                 Datum Deadline
-                <p>{{$action[0]->datum_deadline}}</p>
+                <p>{{$action->datum_deadline}}</p>
             </p>
 
          </li>
@@ -115,7 +114,7 @@
             
             <p class="text-info font-weight-bold">
                 Voortgang
-                <p>{{$action[0]->voortgang}}</p>
+                <p>{{$action->voortgang}}</p>
             </p>
 
          </li>
@@ -124,7 +123,7 @@
             
             <p class="text-info font-weight-bold">
                 Bron Detail
-                <p>{{$action[0]->bron_detail}}</p>
+                <p>{{$action->bron_detail}}</p>
             </p>
 
          </li>
@@ -135,16 +134,16 @@
                 Sector
 
                 <div class="d-flex">
-                    <p class="text-danger">Sector </p> <p class="pl-1"> {{$action[0]->sector}}</p>
+                    <p class="text-danger">Sector </p> <p class="pl-1"> {{$action->sector}}</p>
                 </div>
 
                 <div class="d-flex">
 
-                    <p class="text-danger">Domein: </p> <p class="pl-1">{{$action[0]->domein}}</p>
+                    <p class="text-danger">Domein: </p> <p class="pl-1">{{$action->domein}}</p>
 
                 </div>
                 <div class="d-flex">
-                    <p class="text-danger">Keten:</p> <p class="pl-1">{{$action[0]->keten}}</p>
+                    <p class="text-danger">Keten:</p> <p class="pl-1">{{$action->keten}}</p>
                 </div>
             </p>
 
@@ -154,7 +153,7 @@
             
             <p class="text-info font-weight-bold">
                 Nummer Bevindingen
-                <p>{{$action[0]->nr_bevindingen}}</p>
+                <p>{{$action->nr_bevindingen}}</p>
             </p>
 
          </li>
@@ -163,7 +162,7 @@
             
             <p class="text-info font-weight-bold">
                 Situatie
-                <p> {{$action[0]->situatie}}</p>
+                <p> {{$action->situatie}}</p>
             </p>
 
          </li>
@@ -172,7 +171,7 @@
             
             <p class="text-info font-weight-bold">
                 Risico Beschrijving
-                <p>{{$action[0]->risico_beschrijving}}</p>
+                <p>{{$action->risico_beschrijving}}</p>
             </p>
 
          </li>
@@ -181,7 +180,7 @@
             
             <p class="text-info font-weight-bold">
                 Oorzaak
-                <p>{{$action[0]->oorzaak}}</p>
+                <p>{{$action->oorzaak}}</p>
             </p>
 
          </li>
@@ -190,7 +189,7 @@
             
             <p class="text-info font-weight-bold">
                 Management Actie Plan
-                <p>{{$action[0]->management_actie_plan}}</p>
+                <p>{{$action->management_actie_plan}}</p>
             </p>
 
          </li>
@@ -199,7 +198,7 @@
             
             <p class="text-info font-weight-bold">
                 Deadline Bijgesteld
-                <p>{{$action[0]->deadline_bijgesteld}}</p>
+                <p>{{$action->deadline_bijgesteld}}</p>
             </p>
 
          </li>
@@ -208,7 +207,7 @@
             
             <p class="text-info font-weight-bold">
                 Probleem Eigenaar
-                <p>{{$action[0]->name}}</p>
+                <p>{{$action->name}}</p>
             </p>
 
          </li>
@@ -217,7 +216,7 @@
             
             <p class="text-info font-weight-bold">
                 Actie Eigenaar
-                <p>{{$actionOwner[0]->name}}</p>
+                <p>{{$actionOwner->name ?? 'geen eigenaar'}}</p>
             </p>
 
          </li>
@@ -226,7 +225,7 @@
             
             <p class="text-info font-weight-bold">
                 Status
-                <p>{{$action[0]->status_id}}</p>
+                <p>{{$action->status_id}}</p>
             </p>
 
          </li>
@@ -235,7 +234,7 @@
             
             <p class="text-info font-weight-bold">
                 Aantekening IA
-                <p>{{$action[0]->aantekening_ia}}</p>
+                <p>{{$action->aantekening_ia}}</p>
             </p>
 
          </li>
@@ -244,7 +243,7 @@
             
             <p class="text-info font-weight-bold">
                 Huidige Voortgang
-                <p>{{$action[0]->voortgang}}</p>
+                <p>{{$action->voortgang}}</p>
             </p>
 
          </li>
@@ -253,7 +252,7 @@
             
             <p class="text-info font-weight-bold">
                 Huidige Opmerking Actie Eigenaar
-                <p>{{$action[0]->opmerking_actie_eigenaar}}</p>
+                <p>{{$action->opmerking_actie_eigenaar}}</p>
             </p>
 
          </li>
@@ -265,9 +264,9 @@
             <div class="form-group d-flex justify-content-around">
 
                 {{-- <form action="{{url('progress_action')}}" method="POST"> --}}
-           <form action="{{route('progress.action', $action[0]->id)}}" method="POST">
+           <form action="{{route('progress.action', $action->id)}}" method="POST">
             @method('PUT')
-                    {{-- <input type="hidden" value="{{$action[0]->id}}" name="action_id"> --}}
+                    {{-- <input type="hidden" value="{{$action->id}}" name="action_id"> --}}
                         @csrf
                         <div class="pt-2 ">   
                             <span class="help-block border border-info rounded">Voortgang.</span>
@@ -280,7 +279,7 @@
                             <input type="submit" value="Verzend Voortgang">
                     </form>
    
-                    <form action="{{route('comment.action', $action[0]->id)}}" method="POST">
+                    <form action="{{route('comment.action', $action->id)}}" method="POST">
                         @method('PUT')
                             @csrf
                             <div class="pt-2 ">   
@@ -310,7 +309,7 @@
     </div> --}}
     <form action="{{url('finish_action')}}" method="POST">
         @csrf
-        <input type="hidden" value="{{$action[0]->id}}" name="action_id">
+        <input type="hidden" value="{{$action->id}}" name="action_id">
         <div>
             {{-- <div class="form-group mt-3 ml-3 mr-3">
                 <h3><b>Opmerking</b></h3>
