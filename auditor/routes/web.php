@@ -26,6 +26,7 @@ Route::get('/action', [App\Http\Controllers\ActionController::class, 'getAction'
 // action received
 Route::get('/received', [App\Http\Controllers\ActionController::class, 'received']);
 Route::post('/received/action', [App\Http\Controllers\ActionController::class, 'action']);
+Route::get('/create_action', [App\Http\Controllers\ActionController::class, 'createAction']);
 
 
 Route::get('problem_owner_sended', function(){
