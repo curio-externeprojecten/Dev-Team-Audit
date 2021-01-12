@@ -22,6 +22,8 @@ Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'dash
 Route::get('/action', [App\Http\Controllers\ActionController::class, 'getAction'])->name('getAction');
 
 //Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'getActions'])->name('dashboard');
+Route::get('create_action', [App\Http\Controllers\ActionController::class, 'createAction']);
+Route::post('create_action', [App\Http\Controllers\ActionController::class, 'saveAction'])->name('auditor.create_action');
 
 // action received
 Route::get('/received', [App\Http\Controllers\ActionController::class, 'received']);
