@@ -33,9 +33,9 @@ class ActionController extends Controller
     public function received() {
         // get id & get the data from the database
         $id = Auth::id();
-        $actions = DB::table('actie')
-        ->join('status', 'actie.status_id', '=', 'status.id')
-        ->select('actie.*', 'status.status', 'status.substatus')
+        $actions = DB::table('acties')
+        ->join('status', 'acties.status_id', '=', 'status.id')
+        ->select('acties.*', 'status.status', 'status.substatus')
         ->where('probleem_eigenaar_id', $id)
         ->where('status.status', 'Afgerond')
         ->get();
@@ -74,15 +74,15 @@ class ActionController extends Controller
 
     public function PE_showAction($id) {
         // query breaks when status_id == null?
-        $action = DB::table('actie')
+        $action = DB::table('acties')
         ->join('sector', 'actie.sector_id' ,'=', 'sector.id' )
         ->join('risicosoort', 'actie.risicosoort_id', '=', 'risicosoort.id')
-        ->join('risicoclassificatie', 'actie.risicoclassificatie_id', '=', 'risicoclassificatie.id')
-        ->join('users', 'actie.probleem_eigenaar_id', '=', 'users.id')
-        ->join('status', 'actie.status_id', '=', 'status.id')
-        ->where('actie.id', $id)->get();
+        ->join('risicoclassificatie', 'acties.risicoclassificatie_id', '=', 'risicoclassificatie.id')
+        ->join('users', 'acties.probleem_eigenaar_id', '=', 'users.id')
+        ->join('status', 'acties.status_id', '=', 'status.id')
+        ->where('acties.id', $id)->get();
 
-        $actionOwner = DB::table('actie')->join('users', 'actie.actie_eigenaar_id', '=', 'users.id')->where('actie.id', $id)->first();
+        $actionOwner = DB::table('actie')->join('users', 'acties.actie_eigenaar_id', '=', 'users.id')->where('actie.id', $id)->first();
         
         return view('problem_owner.action', [
             'action' => $action,
@@ -109,10 +109,10 @@ class ActionController extends Controller
                 $id = Auth::id(); 
 
                 // shows all actions sended by the problem_owner to an action_owner with their info.
-                $actions = DB::table('actie')
+                $actions = DB::table('acties')
                 ->where('probleem_eigenaar_id', $id)
-                ->join('users', 'users.id', '=', 'actie.actie_eigenaar_id')
-                ->select('users.name', 'actie.id', 'actie_eigenaar_id', 'omschrijving', 'actie_eigenaar_status', 
+                ->join('users', 'users.id', '=', 'acties.actie_eigenaar_id')
+                ->select('users.name', 'acties.id', 'actie_eigenaar_id', 'omschrijving', 'actie_eigenaar_status', 
                 'voortgang', 'datum_deadline', 'deadline_bijgesteld', 'audit_oordeel_ia', 'bron_detail')
                 ->get();
                 
