@@ -261,9 +261,21 @@
          <li class="bd-highlight border col-5 ml-5">
             
             <p class="text-info font-weight-bold">
-                Opmerking Actie Eigenaar
+                Huidige Opmerking
                 <p>{{$action->opmerking_actie_eigenaar}}</p>
             </p>
-        </li>
+
+         </li>
+
+         <li class="bd-highlight border col-5 ml-5">
+            
+            <p class="text-info font-weight-bold">
+                Huidige Opmerking Probleem Eigenaar
+                <p>{{$action->opmerking_probleem_eigenaar}}</p>
+            </p>
+
+         </li>
+
+        
     </ul>    
 @endsection
