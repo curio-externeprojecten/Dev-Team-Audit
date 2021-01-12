@@ -112,10 +112,9 @@ class ActionController extends Controller
 
                 // shows all actions sended by the problem_owner to an action_owner with their info.
                 $actions = DB::table('acties')
-                ->join('users', 'users.id', '=', 'acties.actie_eigenaar_id')
-                ->select('users.name', 'acties.id', 'actie_eigenaar_id', 'omschrijving', 'actie_eigenaar_status', 
-                'voortgang', 'datum_deadline', 'deadline_bijgesteld', 'probleemeigenaar_status','audit_oordeel_ia', 'bron_detail')
                 ->where('probleem_eigenaar_id', $id)
+                ->join('users', 'users.id', '=', 'acties.actie_eigenaar_id')
+                ->select('users.name', 'acties.*')
                 ->get();
 
                 return view('problem_owner.sended_actions', [
