@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use App\Models\Actie;
 
 class ActionController extends Controller
 {
@@ -13,21 +14,13 @@ class ActionController extends Controller
                 $role = DB::table('roles')->where('user_id', $userId)->value('role');
                 $_SESSION['role'] = $role; // set a session for easier use
 
-                $actionID = $_GET['id'];
-            
-                $action = DB::table('actie')
-                ->join('sector', 'actie.sector_id' ,'=', 'sector.id' )
-                ->join('risicosoort', 'actie.risicosoort_id', '=', 'risicosoort.id')
-                ->join('risicoclassificatie', 'actie.risicoclassificatie_id', '=', 'risicoclassificatie.id')
-                ->join('users', 'actie.probleem_eigenaar_id', '=', 'users.id')->select('*', 'actie.id')
-                ->where('actie.id', $actionID)->get();
 
-                $actionOwner = DB::table('actie')->join('users', 'actie.actie_eigenaar_id', '=', 'users.id')->where('actie.id', $actionID)->get();
-                
+                $actionID = $_GET['id'];
+
+                $action = DB::table('actie')->where('id', $actionID)->get();
+
                 return view('action_owner.action', [
-                    'action' => $action,
-                    'actionOwner' => $actionOwner
-           
+                    'action' => $action
                 ]);;
     }
 
@@ -35,27 +28,26 @@ class ActionController extends Controller
         // get id & get the data from the database
         $id = Auth::id();
         $actions = DB::table('actie')
-        ->join('users', 'actie.actie_eigenaar_id', '=', 'users.id')
-        ->join('risicosoort', 'actie.risicosoort_id', '=', 'risicosoort.id')
-        ->select('actie.*', 'users.name', 'actie.actie_eigenaar_status as status', 'risicosoort.primair')
-        ->where([
-            ['probleem_eigenaar_id', $id],
-            ['actie_eigenaar_status', "AE-afgerond"],
-        ])->get();
+        ->join('status', 'actie.status_id', '=', 'status.id')
+        ->select('actie.*', 'status.status', 'status.substatus')
+        ->where('probleem_eigenaar_id', $id)
+        ->where('status.status', 'Afgerond')
+        ->get();
 
         return view('problem_owner.received_actions', ['actions' => $actions]);
     }
 
-    public function PE_actionReceiver(Request $request) {
+    public function action(Request $request) {
         // using request for clearer overview
         // set the id & what is changing
         $id = $request->input('action_checkbox');
         $change = $request->input('opmerking_action');
-        $btn = "passed";
         
         // check what button is pressed
         if (isset($_POST['btnFailed'])) {
             $btn = "failed";
+        } else {
+            $btn = "passed";
         }
 
         // updates
@@ -63,12 +55,12 @@ class ActionController extends Controller
             $data = $request->input('opmerking');
             $affected = DB::table('actie')
               ->where('id', $id)
-              ->update(['opmerking_probleem_eigenaar' => $change, 'probleemeigenaar_status' => "PE-afgerond", 'actie-eigenaar_status' => NULL]);
+              ->update(['opmerking_probleem_eigenaar' => $change, 'status_id' => 4]);
         }
         else if ($btn == "failed"){
             $affected = DB::table('actie')
               ->where('id', $id)
-              ->update(['actie-eigenaar_status' => "AE-teruggestuurd"]);
+              ->update(['status_id' => 3]);
         }
         
         return redirect()->action([ActionController::class, 'received']);
@@ -131,6 +123,14 @@ class ActionController extends Controller
         $users = DB::table('users')->where('name')->get();
         $statussen = DB::table('status')->get();
 
+    public function createAction() {
+
+        $sectors = \DB::table('sector')->get();
+        $risicosoorten = \DB::table('risicosoort')->get();
+        $risicoclassificaties = \DB::table('risicoclassificatie')->get();
+        $users = \DB::table('users')->where('name')->get();
+        $statussen = \DB::table('status')->get();
+    
         return view('auditor.create_action' , [
             'sectors' => $sectors,
             'risicosoorten' => $risicosoorten,
@@ -138,23 +138,40 @@ class ActionController extends Controller
             'users' => $users,
             'statussen' => $statussen
         ]);
-    }
+    
+}
 
-    // Method to update an comment to an action (ACTION OWNER COMMENT)
 
-    public function UpdateComment(Request $request, $id){
-            // $id = $request->input('action_id');
-            $data = $request->input('comment_action');
-      
-            //$action = DB::table('actie')->where('id', $id);
-             //$data = $request->input('progress_action');
-             DB::table('actie')
-             ->where('id', $id)
-             ->update(['opmerking_actie_eigenaar' => $data]);
-            
-            // return view("action_owner.a
-            return redirect()->back();
-    }
-
+public function saveAction(Request $request) {
+    //$actie = DB::table('actie');
+    $actie = Actie::create([
+        'create_date' => $request->create_date,
+        'bron_detail' => $request->bron_detail,
+        'audit_oordel' => $request->audit_oordel, 
+        'process' => $request->process, 
+        'nummer_bevinding' => $request->nummer_bevinding, 
+        'omschrijving_bevinding' => $request->omschrijving_bevinding, 
+        'probleem' => $request->probleem, 
+        'risico_beschrijving' => $request->risico_beschrijving, 
+        'oorzaak' => $request->oorzaak, 
+        'aanbeveling_ia' => $request->aanbeveling_ia, 
+        'map' => $request->map, 
+        'datum_deadline' => $request->datum_deadline, 
+        'datum_bijgesteld' => $request->datum_bijgesteld, 
+        'datum_gesloten' => $request->datum_gesloten, 
+        'voortgang' => $request->voortgang, 
+        'aantekeningen_ia' => $request->aantekeningen_ia, 
+        'oordeel_ia' => $request->oordeel_ia, 
+        'sector' => $request->sector, 
+        'pr' => $request->pr, 
+        'sr' => $request->sr, 
+        'arc' => $request->arc, 
+        'orc' => $request->orc, 
+        'grc' => $request->grc, 
+        'status' => $request->status, 
+        'sub_status' => $request->sub_status
+        ]);
+    
+}
 
 }

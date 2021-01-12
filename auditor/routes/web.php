@@ -22,11 +22,13 @@ Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'dash
 Route::get('/action', [App\Http\Controllers\ActionController::class, 'getAction'])->name('getAction');
 
 //Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'getActions'])->name('dashboard');
+Route::get('create_action', [App\Http\Controllers\ActionController::class, 'createAction']);
+Route::post('create_action', [App\Http\Controllers\ActionController::class, 'saveAction'])->name('auditor.create_action');
 
 // action received
 Route::get('/received', [App\Http\Controllers\ActionController::class, 'received']);
-Route::post('/received/action', [App\Http\Controllers\ActionController::class, 'PE_actionReceiver']);
-Route::get('/received/action/{id}', [App\Http\Controllers\ActionController::class, 'PE_showAction']);
+Route::post('/received/action', [App\Http\Controllers\ActionController::class, 'PE_actionReceiver'])->name('PE_receivedAction');
+Route::get('/received/action/{id}', [App\Http\Controllers\ActionController::class, 'PE_showAction'])->name('PE_receivedShowAction');
 
 // change owner from action problem_owner
 Route::post('actions/change_owner', [App\Http\Controllers\ActionController::class, 'sendAction'] )->name('actions.change_owner');
