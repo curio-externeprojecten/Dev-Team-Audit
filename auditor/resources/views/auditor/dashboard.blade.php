@@ -11,7 +11,7 @@
                 <a class="nav-link" href="dashboard">Homepagina</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/action/create">Maak actie aan</a>
+                <a class="nav-link" href="/create_action">Maak actie aan</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link " href="/">Terug ontvangen acties</a>
