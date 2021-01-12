@@ -226,7 +226,7 @@
             
             <p class="text-info font-weight-bold">
                 Status
-                <p>{{$action->status_id}}</p>
+                <p>{{$action->status}}</p>
             </p>
 
          </li>
@@ -252,17 +252,24 @@
          <li class="bd-highlight border col-5 ml-5">
             
             <p class="text-info font-weight-bold">
-                Huidige Opmerking Actie Eigenaar
+                Huidige Opmerking
                 <p>{{$action->opmerking_actie_eigenaar}}</p>
             </p>
 
          </li>
 
-        
+         <li class="bd-highlight border col-5 ml-5">
+            
+            <p class="text-info font-weight-bold">
+                Huidige Opmerking Probleem Eigenaar
+                <p>{{$action->opmerking_probleem_eigenaar}}</p>
+            </p>
+
+         </li>
 
             <li class="bd-highlight border col-5 ml-5">
 
-            <div class="form-group d-flex justify-content-around">
+            <div class="form-group">
 
                 {{-- <form action="{{url('progress_action')}}" method="POST"> --}}
            <form action="{{route('progress.action', $action->actie_id)}}" method="POST">
@@ -273,30 +280,36 @@
                             <span class="help-block border border-info rounded">Voortgang.</span>
                         </div>
             
-                            <br></br>
+                            
                             <div class="form">
                                 <textarea cols="40" rows="5" name="progress_action"></textarea> {{-- Text area om te verzenden!--}}
                             </div>
-                            <input type="submit" value="Verzend Voortgang">
+                            <input type="submit" value="Voortgang opslaan.">
                     </form>
    
-                    <form action="{{route('comment.action', $action->actie_id)}}" method="POST">
+                 
+
+            </div>
+                    
+           
+            </li>
+
+            <li class="bd-highlight border col-5 ml-5">
+
+                   <form action="{{route('comment.action', $action->actie_id)}}" method="POST">
                         @method('PUT')
                             @csrf
                             <div class="pt-2 ">   
                                 <span class="help-block border border-info rounded">Opmerking.</span>
                             </div>
                 
-                                <br></br>
+                                
                                 <div class="form">
                                     <textarea cols="40" rows="5" name="comment_action"></textarea> 
                                 </div>
-                                <input type="submit" value="Verzend Opmerking">
+                                <input type="submit" value="Opmerking opslaan.">
                         </form>
-
-            </div>
-                    
-           
+                        
             </li>
  
     </ul>
@@ -320,11 +333,9 @@
     
         <div class="d-flex justify-content-around">
             
-            <input type="submit" name="finish_action" class="btn btn-primary m-2 w-50" value="Afronden">
+            <input type="submit" name="finish_action" class="btn btn-primary m-2 w-50" value="Doorsturen naar probleemeigenaar">
         </div>
     </form>
-
-   
 
     
 @endsection
