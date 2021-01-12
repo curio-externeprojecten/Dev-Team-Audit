@@ -17,7 +17,12 @@ class ActionController extends Controller
 
                 $actionID = $_GET['id'];
 
-                $action = DB::table('actie')->where('id', $actionID)->get();
+                $action = DB::table('acties')
+                ->join('sector', 'acties.sector_id' ,'=', 'sector.id' )
+                ->join('risicosoort', 'acties.risicosoort_id', '=', 'risicosoort.id')
+                ->join('risicoclassificatie', 'acties.risicoclassificatie_id', '=', 'risicoclassificatie.id')
+                ->join('users', 'acties.probleem_eigenaar_id', '=', 'users.id')
+                ->join('status', 'acties.status_id', '=', 'status.id')->where('acties.id', $actionID)->first();
 
                 return view('action_owner.action', [
                     'action' => $action
@@ -27,40 +32,44 @@ class ActionController extends Controller
     public function received() {
         // get id & get the data from the database
         $id = Auth::id();
-        $actions = DB::table('actie')
-        ->join('status', 'actie.status_id', '=', 'status.id')
-        ->select('actie.*', 'status.status', 'status.substatus')
-        ->where('probleem_eigenaar_id', $id)
-        ->where('status.status', 'Afgerond')
-        ->get();
+        $actions = DB::table('acties')
+        ->join('users', 'acties.actie_eigenaar_id', '=', 'users.id')
+        ->join('risicosoort', 'acties.risicosoort_id', '=', 'risicosoort.id')
+        ->select('acties.*', 'users.name', 'acties.actie_eigenaar_status as AE_status', 'acties.probleemeigenaar_status as PE_status', 'risicosoort.primair')
+        ->where([
+            ['probleem_eigenaar_id', $id],
+            ['actie_eigenaar_status', "AE-afgerond"],
+        ])->orWhere([
+            ['probleem_eigenaar_id', $id],
+            ['probleemeigenaar_status', "PE-teruggestuurd"],
+        ])->get();
 
         return view('problem_owner.received_actions', ['actions' => $actions]);
     }
 
-    public function action(Request $request) {
+    public function PE_actionReceiver(Request $request) {
         // using request for clearer overview
         // set the id & what is changing
         $id = $request->input('action_checkbox');
         $change = $request->input('opmerking_action');
+        $btn = "passed";
         
         // check what button is pressed
         if (isset($_POST['btnFailed'])) {
             $btn = "failed";
-        } else {
-            $btn = "passed";
         }
 
         // updates
         if($btn == "passed"){
             $data = $request->input('opmerking');
-            $affected = DB::table('actie')
+            $affected = DB::table('acties')
               ->where('id', $id)
-              ->update(['opmerking_probleem_eigenaar' => $change, 'status_id' => 4]);
+              ->update(['opmerking_probleem_eigenaar' => $change, 'probleemeigenaar_status' => "PE-afgerond", 'actie_eigenaar_status' => NULL]);
         }
         else if ($btn == "failed"){
-            $affected = DB::table('actie')
+            $affected = DB::table('acties')
               ->where('id', $id)
-              ->update(['status_id' => 3]);
+              ->update(['opmerking_probleem_eigenaar' => $change, 'actie_eigenaar_status' => "AE-teruggestuurd"]);
         }
         
         return redirect()->action([ActionController::class, 'received']);
@@ -68,21 +77,20 @@ class ActionController extends Controller
 
     public function PE_showAction($id) {
         // query breaks when status_id == null?
-        $action = DB::table('actie')
-        ->join('sector', 'actie.sector_id' ,'=', 'sector.id' )
-        ->join('risicosoort', 'actie.risicosoort_id', '=', 'risicosoort.id')
-        ->join('risicoclassificatie', 'actie.risicoclassificatie_id', '=', 'risicoclassificatie.id')
-        ->join('users', 'actie.probleem_eigenaar_id', '=', 'users.id')
-        ->join('status', 'actie.status_id', '=', 'status.id')
-        ->where('actie.id', $id)->get();
+        $action = DB::table('acties')
+        ->join('sector', 'acties.sector_id' ,'=', 'sector.id' )
+        ->join('risicosoort', 'acties.risicosoort_id', '=', 'risicosoort.id')
+        ->join('risicoclassificatie', 'acties.risicoclassificatie_id', '=', 'risicoclassificatie.id')
+        ->join('users', 'acties.probleem_eigenaar_id', '=', 'users.id')
+        ->where('acties.id', '=', $id)->first();
 
-        $actionOwner = DB::table('actie')->join('users', 'actie.actie_eigenaar_id', '=', 'users.id')->where('actie.id', $id)->get();
+        $actionOwner = DB::table('acties')->join('users', 'acties.actie_eigenaar_id', '=', 'users.id')->where('acties.id', $id)->get();
         
         return view('problem_owner.action', [
             'action' => $action,
             'actionOwner' => $actionOwner
 
-        ]);;
+        ]);
     }
 
     public function sendAction(Request $request){
@@ -92,7 +100,7 @@ class ActionController extends Controller
         if (isset($request->actions)) {
             $action_owner_id = $request->input('actie_eigenaar_id');
 
-            $send_action = DB::table('actie')->where('id', $request->actions)
+            $send_action = DB::table('acties')->where('id', $request->actions)
                                              ->update(['actie_eigenaar_id' => $action_owner_id]);
         }
 
@@ -103,13 +111,12 @@ class ActionController extends Controller
                 $id = Auth::id(); 
 
                 // shows all actions sended by the problem_owner to an action_owner with their info.
-                $actions = DB::table('actie')
+                $actions = DB::table('acties')
+                ->join('users', 'users.id', '=', 'acties.actie_eigenaar_id')
+                ->select('users.name', 'acties.id', 'actie_eigenaar_id', 'omschrijving', 'actie_eigenaar_status', 
+                'voortgang', 'datum_deadline', 'deadline_bijgesteld', 'probleemeigenaar_status','audit_oordeel_ia', 'bron_detail')
                 ->where('probleem_eigenaar_id', $id)
-                ->join('users', 'users.id', '=', 'actie.actie_eigenaar_id')
-                ->select('users.name', 'actie.id', 'actie_eigenaar_id', 'omschrijving', 'actie_eigenaar_status', 
-                'voortgang', 'datum_deadline', 'deadline_bijgesteld', 'audit_oordeel_ia', 'bron_detail')
                 ->get();
-                
 
                 return view('problem_owner.sended_actions', [
                     'actions' => $actions
@@ -122,6 +129,7 @@ class ActionController extends Controller
         $risicoclassificaties = DB::table('risicoclassificatie')->get();
         $users = DB::table('users')->where('name')->get();
         $statussen = DB::table('status')->get();
+    }
 
     public function createAction() {
 
@@ -138,8 +146,7 @@ class ActionController extends Controller
             'users' => $users,
             'statussen' => $statussen
         ]);
-    
-}
+    }
 
 
 public function saveAction(Request $request) {

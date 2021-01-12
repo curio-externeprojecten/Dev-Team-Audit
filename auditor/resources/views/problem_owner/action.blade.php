@@ -2,231 +2,261 @@
 
 
 @section('title')
-    {{$action[0]->bron_detail}}
+    
 @endsection
 
 @section('header')
-   <div class="d-flex align-items-center">
-      <li class="nav-item">
-         <a class="nav-link" href="/dashboard">Homepagina</a>
-      </li>
-      <li class="nav-item">
-         <a class="nav-link " href="/problem_owner_sended">Toegewezen acties</a>
-      </li>
-      <li class="nav-item">
-         <a class="nav-link " href="/received">Terug ontvangen acties</a>
-      </li>
-   </div>
+<div class="d-flex align-items-center">
+    
+        <a class="nav-link" href="dashboard">Homepagina</a>
+    
+</div>
 @endsection
 
 @section('content')
-    @php
-        $schemes = Schema::getColumnListing('actie');
-        $i = 1;
+      <ul class="row list-unstyled pr-5 pt-5">
 
-        $names = [
-            'Datum Ontstaan',
-            'Audit Oordeel IA',
-            'Process',
-            'Omschrijving',
-            'Risicosoort',
-            'RisicoClassificatie',
-            'Aanbeveling Internal Audit',
-            'Datum Deadline',
-            'Voortgang',
-            'Bron Detail',
-            'Sector',
-            'Bevinding',
-            'Situatie',
-            'Risico Beschrijving',
-            'Oorzaak',
-            'Management Actie Plan',
-            'Deadline Bijgesteld',
-            'Probleem Eigenaar',
-            'Status',
-            'Aantekening IA',
-        ];
-    @endphp
-    <h2 class="text-center mb-0">{{$action[0]->bron_detail}}</h2>
-
-    <div>
-        <a class="btn btn-primary m-4 mb-4" href="/received">Ga terug naar ontvangen acties</a>
-    </div>
-
-    <ul class="row list-unstyled pr-5">
         <li class="bd-highlight border col-5 ml-5">
-            <p class="text-info font-weight-bold mb-2">
+            
+            <p class="text-info font-weight-bold">
                 Datum Ontstaan
-                <p>{{$action[0]->datum_ontstaan}}</p>
+                <p>{{$action->datum_ontstaan}}</p>
             </p>
+
         </li>
 
         <li class="bd-highlight border col-5 ml-5">
-            <p class="text-info font-weight-bold mb-2">
+            
+            <p class="text-info font-weight-bold">
                 Audit Oordeel IA
-                <p>{{$action[0]->audit_oordeel_ia}}</p>
+                <p>{{$action->audit_oordeel_ia}}</p>
             </p>
+
         </li>
 
         <li class="bd-highlight border col-5 ml-5">
-            <p class="text-info font-weight-bold mb-2">
+            
+            <p class="text-info font-weight-bold">
                 Process
-                <p> {{$action[0]->proces}}</p>
+                <p> {{$action->proces}}</p>
             </p>
+
         </li>
 
         <li class="bd-highlight border col-5 ml-5">
-            <p class="text-info font-weight-bold mb-2">
+            
+            <p class="text-info font-weight-bold">
                 Omschrijving
-                <p> {{$action[0]->omschrijving}}</p>
+                <p> {{$action->omschrijving}}</p>
             </p>
+
         </li>
 
         <li class="bd-highlight border col-5 ml-5">
-            <p class="text-info font-weight-bold mb-2">
+            
+            <p class="text-info font-weight-bold">
                 Risicosoort
 
                 <div class="d-flex">
-                    <p class="text-danger">Primair: </p> <p class="pl-1"> {{$action[0]->primair}}</p>
+                    <p class="text-danger">Primair: </p> <p class="pl-1"> {{$action->primair}}</p>
                 </div>
 
                 <div class="d-flex">
-                    <p class="text-danger">Secundair: </p> <p class="pl-1">{{$action[0]->secundair}}</p>
+
+                    <p class="text-danger">Secundair: </p> <p class="pl-1">{{$action->secundair}}</p>
+
                 </div>
+             
             </p>
+
         </li>
 
         <li class="bd-highlight border col-5 ml-5">
-            <p class="text-info font-weight-bold mb-2">
+            
+            <p class="text-info font-weight-bold">
                 RisicoClassificatie
 
                 <div class="d-flex">
-                    <p class="text-danger">Actuele Risicoclassificatie ia: </p> <p class="pl-1"> {{$action[0]->actuele_risicoclassificatie_ia}}</p>
+                    <p class="text-danger">Actuele Risicoclassificatie ia: </p> <p class="pl-1"> {{$action->actuele_risicoclassificatie_ia}}</p>
                 </div>
 
                 <div class="d-flex">
-                    <p class="text-danger">Oorzaak Classificatie: </p> <p class="pl-1">{{$action[0]->oorzaak_clasificatie}}</p>
-                </div>
 
+                    <p class="text-danger">Oorzaak Classificatie: </p> <p class="pl-1">{{$action->oorzaak_clasificatie}}</p>
+
+                </div>
                 <div class="d-flex">
-                    <p class="text-danger">Gerapporteerd Risico:</p> <p class="pl-1">{{$action[0]->gerapporteerd_risico}}</p>
+                    <p class="text-danger">Gerapporteerd Risico:</p> <p class="pl-1">{{$action->gerapporteerd_risico}}</p>
                 </div>
             </p>
+
         </li>
 
-        <li class="bd-highlight border col-5 ml-5">
-            <p class="text-info font-weight-bold mb-2">
+          <li class="bd-highlight border col-5 ml-5">
+            
+            <p class="text-info font-weight-bold">
                 Aanbeveling Internal Audit
-                <p>{{$action[0]->aanbeveling_internal_audit}}</p>
+                <p>{{$action->aanbeveling_internal_audit}}</p>
             </p>
-        </li>
 
-        <li class="bd-highlight border col-5 ml-5">
-            <p class="text-info font-weight-bold mb-2">
+         </li>
+
+         <li class="bd-highlight border col-5 ml-5">
+            
+            <p class="text-info font-weight-bold">
                 Datum Deadline
-                <p>{{$action[0]->datum_deadline}}</p>
+                <p>{{$action->datum_deadline}}</p>
             </p>
-        </li>
 
-        <li class="bd-highlight border col-5 ml-5">
-            <p class="text-info font-weight-bold mb-2">
+         </li>
+
+         <li class="bd-highlight border col-5 ml-5">
+            
+            <p class="text-info font-weight-bold">
                 Voortgang
-                <p>{{$action[0]->voortgang}}</p>
+                <p>{{$action->voortgang}}</p>
             </p>
-        </li>
 
-        <li class="bd-highlight border col-5 ml-5">
-            <p class="text-info font-weight-bold mb-2">
+         </li>
+
+         <li class="bd-highlight border col-5 ml-5">
+            
+            <p class="text-info font-weight-bold">
                 Bron Detail
-                <p>{{$action[0]->bron_detail}}</p>
+                <p>{{$action->bron_detail}}</p>
             </p>
-        </li>
 
-        <li class="bd-highlight border col-5 ml-5">
-            <p class="text-info font-weight-bold mb-2">
+         </li>
+
+         <li class="bd-highlight border col-5 ml-5">
+            
+            <p class="text-info font-weight-bold">
                 Sector
 
                 <div class="d-flex">
-                    <p class="text-danger">Sector </p> <p class="pl-1"> {{$action[0]->sector}}</p>
+                    <p class="text-danger">Sector </p> <p class="pl-1"> {{$action->sector}}</p>
                 </div>
 
                 <div class="d-flex">
-                    <p class="text-danger">Domein: </p> <p class="pl-1">{{$action[0]->domein}}</p>
-                </div>
 
+                    <p class="text-danger">Domein: </p> <p class="pl-1">{{$action->domein}}</p>
+
+                </div>
                 <div class="d-flex">
-                    <p class="text-danger">Keten:</p> <p class="pl-1">{{$action[0]->keten}}</p>
+                    <p class="text-danger">Keten:</p> <p class="pl-1">{{$action->keten}}</p>
                 </div>
             </p>
-        </li>
 
-        <li class="bd-highlight border col-5 ml-5">
-            <p class="text-info font-weight-bold mb-2">
+         </li>
+
+         <li class="bd-highlight border col-5 ml-5">
+            
+            <p class="text-info font-weight-bold">
                 Nummer Bevindingen
-                <p>{{$action[0]->nr_bevindingen}}</p>
+                <p>{{$action->nr_bevindingen}}</p>
             </p>
-        </li>
 
-        <li class="bd-highlight border col-5 ml-5">
-            <p class="text-info font-weight-bold mb-2">
+         </li>
+
+         <li class="bd-highlight border col-5 ml-5">
+            
+            <p class="text-info font-weight-bold">
                 Situatie
-                <p> {{$action[0]->situatie}}</p>
+                <p> {{$action->situatie}}</p>
             </p>
-        </li>
 
-        <li class="bd-highlight border col-5 ml-5">
-            <p class="text-info font-weight-bold mb-2">
+         </li>
+
+         <li class="bd-highlight border col-5 ml-5">
+            
+            <p class="text-info font-weight-bold">
                 Risico Beschrijving
-                <p>{{$action[0]->risico_beschrijving}}</p>
+                <p>{{$action->risico_beschrijving}}</p>
             </p>
-        </li>
 
-        <li class="bd-highlight border col-5 ml-5">
-            <p class="text-info font-weight-bold mb-2">
+         </li>
+
+         <li class="bd-highlight border col-5 ml-5">
+            
+            <p class="text-info font-weight-bold">
                 Oorzaak
-                <p>{{$action[0]->oorzaak}}</p>
+                <p>{{$action->oorzaak}}</p>
             </p>
-        </li>
 
-        <li class="bd-highlight border col-5 ml-5">
-            <p class="text-info font-weight-bold mb-2">
+         </li>
+
+         <li class="bd-highlight border col-5 ml-5">
+            
+            <p class="text-info font-weight-bold">
                 Management Actie Plan
-                <p>{{$action[0]->management_actie_plan}}</p>
+                <p>{{$action->management_actie_plan}}</p>
             </p>
-        </li>
 
-        <li class="bd-highlight border col-5 ml-5">
-            <p class="text-info font-weight-bold mb-2">
+         </li>
+
+         <li class="bd-highlight border col-5 ml-5">
+            
+            <p class="text-info font-weight-bold">
                 Deadline Bijgesteld
-                <p>{{$action[0]->deadline_bijgesteld}}</p>
+                <p>{{$action->deadline_bijgesteld}}</p>
             </p>
-        </li>
 
-        <li class="bd-highlight border col-5 ml-5">
-            <p class="text-info font-weight-bold mb-2">
+         </li>
+
+         <li class="bd-highlight border col-5 ml-5">
+            
+            <p class="text-info font-weight-bold">
                 Probleem Eigenaar
-                <p>{{$action[0]->name}}</p>
+                <p>{{$action->name}}</p>
             </p>
-        </li>
 
-        <li class="bd-highlight border col-5 ml-5">
-            <p class="text-info font-weight-bold mb-2">
+         </li>
+
+         <li class="bd-highlight border col-5 ml-5">
+            
+            <p class="text-info font-weight-bold">
                 Actie Eigenaar
-                <p>{{$actionOwner[0]->name}}</p>
+                @if (isset($actionOwner) && !empty($actionOwner->name))
+                    <p>{{$actionOwner->name}}</p>
+                @else
+                    <p>Geen actie eigenaar gekozen</p>
+                @endif
             </p>
-        </li>
 
-        <li class="bd-highlight border col-5 ml-5">
-            <p class="text-info font-weight-bold mb-2">
+         </li>
+
+         <li class="bd-highlight border col-5 ml-5">
+            
+            <p class="text-info font-weight-bold">
                 Status
-                <p>{{$action[0]->status}}</p>
+                <p>{{$action->status_id}}</p>
             </p>
-        </li>
 
-        <li class="bd-highlight border col-5 ml-5">
-            <p class="text-info font-weight-bold mb-2">
+         </li>
+
+         <li class="bd-highlight border col-5 ml-5">
+            
+            <p class="text-info font-weight-bold">
                 Aantekening IA
-                <p>{{$action[0]->aantekening_ia}}</p>
+                <p>{{$action->aantekening_ia}}</p>
+            </p>
+
+         </li>
+
+         <li class="bd-highlight border col-5 ml-5">
+            
+            <p class="text-info font-weight-bold">
+                Huidige Voortgang
+                <p>{{$action->voortgang}}</p>
+            </p>
+
+         </li>
+
+         <li class="bd-highlight border col-5 ml-5">
+            
+            <p class="text-info font-weight-bold">
+                Opmerking Actie Eigenaar
+                <p>{{$action->opmerking_actie_eigenaar}}</p>
             </p>
         </li>
     </ul>    
