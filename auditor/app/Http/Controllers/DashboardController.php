@@ -89,8 +89,12 @@ class DashboardController extends Controller
             else {  
                // @if($action->actie_eigenaar_status == null || $action->actie_eigenaar_status == 'AE-teruggestuurd')
        
-                $actions = DB::table('acties')->select('*')->where('actie_eigenaar_id', $id)
-                ->where('actie_eigenaar_status', 'AE-teruggestuurd')->orWhere('actie_eigenaar_status', null)->get();
+               $actions = DB::table('acties')->select('*')
+               ->where('actie_eigenaar_id', $id)
+               ->where(function ($query) {
+                   $query->where('actie_eigenaar_status', '=', 'AE-teruggestuurd')
+                           ->orWhere('actie_eigenaar_status', '=', null);
+               })->get();
 
                 return $actions;
             }
