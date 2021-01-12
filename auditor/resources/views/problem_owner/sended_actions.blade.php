@@ -27,6 +27,7 @@
 
             <ul class="list-group">
                 @foreach ($actions as $action)
+        
                     @if ($action->actie_eigenaar_id != null && $action->probleemeigenaar_status != 'PE-afgerond' && $action->actie_eigenaar_status != 'AE-afgerond')
                         <li class="list-group-item">
                             <div class="form-check">
@@ -41,7 +42,7 @@
                                     @if ($action->deadline_bijgesteld != null)
                                         <p>Datum deadline bijgesteld naar: <b>{{ $action->deadline_bijgesteld }}</b></p>
                                     @else
-                                        <p>Datum deadline: <b>{{ $action->datum_deadline }}</b></p>
+                                        <p>Datum deadline: <b>{{ $action->datum_deadline }}</b</p>
                                     @endif
                                         <p>Voortgang: <b>{{ $action->voortgang }}</b></p>
                                     @if ($action->opmerking_actie_eigenaar != null)

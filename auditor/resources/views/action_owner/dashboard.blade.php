@@ -21,6 +21,7 @@
 @endsection
 
 @section('action_content')
+
     @if (isset($actions))
 
 

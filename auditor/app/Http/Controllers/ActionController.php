@@ -17,13 +17,13 @@ class ActionController extends Controller
 
                 $actionID = $_GET['id'];
 
-                $action = DB::table('acties')
+                $action = DB::table('acties')->select('*', 'acties.id as actie_id')
                 ->join('sector', 'acties.sector_id' ,'=', 'sector.id' )
                 ->join('risicosoort', 'acties.risicosoort_id', '=', 'risicosoort.id')
                 ->join('risicoclassificatie', 'acties.risicoclassificatie_id', '=', 'risicoclassificatie.id')
                 ->join('users', 'acties.probleem_eigenaar_id', '=', 'users.id')
                 ->join('status', 'acties.status_id', '=', 'status.id')->where('acties.id', $actionID)->first();
-
+          
                 return view('action_owner.action', [
                     'action' => $action
                 ]);
@@ -119,7 +119,7 @@ class ActionController extends Controller
                 
                 return view('problem_owner.sended_actions', [
                     'actions' => $actions
-                ]);;
+                ]);
     }   
 
     public function createActionPage(){
@@ -175,6 +175,22 @@ public function saveAction(Request $request) {
         'probleem_eigenaar_id' => $request->probleem_eigenaar_id
         ]);
     return redirect('dashboard');
+}
+
+// Method to update an comment to an action (ACTION OWNER COMMENT)
+
+public function UpdateComment(Request $request, $id){
+    // $id = $request->input('action_id');
+    $data = $request->input('comment_action');
+
+    //$action = DB::table('actie')->where('id', $id);
+     //$data = $request->input('progress_action');
+     DB::table('acties')
+     ->where('id', $id)
+     ->update(['opmerking_actie_eigenaar' => $data]);
+    
+    // return view("action_owner.a
+    return redirect()->back();
 }
 
 }
