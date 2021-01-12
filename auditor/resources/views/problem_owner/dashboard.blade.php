@@ -80,6 +80,9 @@
                                             <p>Datum deadline bijgesteld naar: <b>{{ $action->deadline_bijgesteld }}</b></p>
                                         @endif
                                             <p>Voortgang: <b>{{ $action->voortgang }}</b></p>
+                                        @if ($action->opmerking_audit != null)
+                                            <p>Opmerking Audit: <b>{{ $action->opmerking_audit }}</b></p>
+                                        @endif
                                             <input class="m-2" type="checkbox" value="{{ $action->id }}" name="actions[]" class="problem_owner_checkbox" id="problem_owner_checkbox">
                                             <a href="action?id={{$id}}" class="btn btn-outline-secondary">{{ $action->omschrijving }}</a>
                                     </footer>

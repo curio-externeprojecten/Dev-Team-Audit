@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
-use App\Models\Actie;
+use App\Models\Acties;
 
 class ActionController extends Controller
 {
@@ -108,18 +108,18 @@ class ActionController extends Controller
     }   
 
     public function sendedActions(){
-        $id = Auth::id(); 
+                $id = Auth::id(); 
 
-        // shows all actions sended by the problem_owner to an action_owner with their info.
-        $actions = DB::table('acties')
-        ->where('probleem_eigenaar_id', $id)
-        ->join('users', 'users.id', '=', 'acties.actie_eigenaar_id')
-        ->select('users.name', 'acties.*')
-        ->get();
-        
-        return view('problem_owner.sended_actions', [
-            'actions' => $actions
-        ]);
+                // shows all actions sended by the problem_owner to an action_owner with their info.
+                $actions = DB::table('acties')
+                ->where('probleem_eigenaar_id', $id)
+                ->join('users', 'users.id', '=', 'acties.actie_eigenaar_id')
+                ->select('users.name', 'acties.*')
+                ->get();
+                
+                return view('problem_owner.sended_actions', [
+                    'actions' => $actions
+                ]);
     }   
 
     public function createActionPage(){
@@ -149,32 +149,28 @@ class ActionController extends Controller
 
 public function saveAction(Request $request) {
     //$actie = DB::table('actie');
-    $actie = Actie::create([
-        'create_date' => $request->create_date,
+    $acties = Acties::create([
+        'datum_ontstaan' => $request->datum_ontstaan,
         'bron_detail' => $request->bron_detail,
-        'audit_oordel' => $request->audit_oordel, 
-        'process' => $request->process, 
-        'nummer_bevinding' => $request->nummer_bevinding, 
-        'omschrijving_bevinding' => $request->omschrijving_bevinding, 
-        'probleem' => $request->probleem, 
+        'audit_oordeel_ia' => $request->audit_oordeel_ia, 
+        'proces' => $request->proces, 
+        'nr_bevindingen' => $request->nr_bevindingen, 
+        'omschrijving' => $request->omschrijving, 
+        'situatie' => $request->situatie, 
         'risico_beschrijving' => $request->risico_beschrijving, 
         'oorzaak' => $request->oorzaak, 
-        'aanbeveling_ia' => $request->aanbeveling_ia, 
-        'map' => $request->map, 
+        'aanbeveling_internal_audit' => $request->aanbeveling_internal_audit, 
+        'management_actie_plan' => $request->management_actie_plan, 
         'datum_deadline' => $request->datum_deadline, 
-        'datum_bijgesteld' => $request->datum_bijgesteld, 
+        'deadline_bijgesteld' => $request->deadline_bijgesteld, 
         'datum_gesloten' => $request->datum_gesloten, 
         'voortgang' => $request->voortgang, 
-        'aantekeningen_ia' => $request->aantekeningen_ia, 
+        'aantekening_ia' => $request->aantekening_ia, 
         'oordeel_ia' => $request->oordeel_ia, 
-        'sector' => $request->sector, 
-        'pr' => $request->pr, 
-        'sr' => $request->sr, 
-        'arc' => $request->arc, 
-        'orc' => $request->orc, 
-        'grc' => $request->grc, 
-        'status' => $request->status, 
-        'sub_status' => $request->sub_status
+        'sector_id' => $request->sector_id, 
+        'risicosoort_id' => $request->risicosoort_id, 
+        'risico_beschrijving' => $request->risico_beschrijving, 
+        'status_id' => $request->status_id
         ]);
     
 }
