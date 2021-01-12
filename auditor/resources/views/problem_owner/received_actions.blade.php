@@ -64,8 +64,8 @@
         </div>
 
         <div class="d-flex justify-content-around">
-            <input type="submit" name="btnCorrect" class="btn btn-primary m-2 w-50" value="Doorsturen">
-            <input type="submit" name="btnFailed" class="btn btn-primary m-2 w-50" value="Terugsturen">
+            <input type="submit" name="btnCorrect" class="btn btn-primary m-2 w-50" value="Doorsturen naar auditor">
+            <input type="submit" name="btnFailed" class="btn btn-primary m-2 w-50" value="Terugsturen naar actie-eigenaar">
         </div>
     </form>
 </div>
