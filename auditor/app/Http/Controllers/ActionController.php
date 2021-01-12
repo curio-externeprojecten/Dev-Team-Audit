@@ -98,7 +98,7 @@ class ActionController extends Controller
         if (isset($request->actions)) {
             $action_owner_id = $request->input('actie_eigenaar_id');
 
-            $send_action = DB::table('actie')->where('id', $request->actions)
+            $send_action = DB::table('acties')->where('id', $request->actions)
                                              ->update(['actie_eigenaar_id' => $action_owner_id]);
         }
 
@@ -109,11 +109,10 @@ class ActionController extends Controller
                 $id = Auth::id(); 
 
                 // shows all actions sended by the problem_owner to an action_owner with their info.
-                $actions = DB::table('actie')
+                $actions = DB::table('acties')
                 ->where('probleem_eigenaar_id', $id)
-                ->join('users', 'users.id', '=', 'actie.actie_eigenaar_id')
-                ->select('users.name', 'actie.id', 'actie_eigenaar_id', 'omschrijving', 'actie_eigenaar_status', 
-                'voortgang', 'datum_deadline', 'deadline_bijgesteld', 'audit_oordeel_ia', 'bron_detail')
+                ->join('users', 'users.id', '=', 'acties.actie_eigenaar_id')
+                ->select('users.name', 'acties.*')
                 ->get();
                 
 
