@@ -9,11 +9,11 @@ use App\Models\Actie;
 class ActionController extends Controller
 {
     public function getAction(){
+        
                 // db data
                 $userId = Auth::id(); 
                 $role = DB::table('roles')->where('user_id', $userId)->value('role');
                 $_SESSION['role'] = $role; // set a session for easier use
-
 
                 $actionID = $_GET['id'];
 
@@ -26,7 +26,7 @@ class ActionController extends Controller
 
                 return view('action_owner.action', [
                     'action' => $action
-                ]);;
+                ]);
     }
 
     public function received() {
@@ -132,13 +132,12 @@ class ActionController extends Controller
     }
 
     public function createAction() {
+        $sectors = DB::table('sector')->get();
+        $risicosoorten = DB::table('risicosoort')->get();
+        $risicoclassificaties = DB::table('risicoclassificatie')->get();
+        $users = DB::table('users')->where('name')->get();
+        $statussen = DB::table('status')->get();
 
-        $sectors = \DB::table('sector')->get();
-        $risicosoorten = \DB::table('risicosoort')->get();
-        $risicoclassificaties = \DB::table('risicoclassificatie')->get();
-        $users = \DB::table('users')->where('name')->get();
-        $statussen = \DB::table('status')->get();
-    
         return view('auditor.create_action' , [
             'sectors' => $sectors,
             'risicosoorten' => $risicosoorten,

@@ -17,7 +17,7 @@ class StatusController extends Controller
         // //   ->where('id', $id)
         // //   ->update(['voortgang' => $data]);
 
-         $secondChange = DB::table('actie')->where('id', $id)->update(['actie_eigenaar_status' => 'AE-afgerond']); // Update the status to send the action to the problem owner
+         $secondChange = DB::table('acties')->where('id', $id)->update(['actie_eigenaar_status' => 'AE-afgerond']); // Update the status to send the action to the problem owner
 
         // return view("action_owner.action?id='$id'");
         return redirect()->action([DashboardController::class, 'dashboard']);

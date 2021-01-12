@@ -14,6 +14,7 @@
 @endsection
 
 @section('content')
+
       <ul class="row list-unstyled pr-5 pt-5">
 
         <li class="bd-highlight border col-5 ml-5">

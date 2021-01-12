@@ -15,7 +15,7 @@ class ProgressController extends Controller
 
         //$action = DB::table('actie')->where('id', $id);
          //$data = $request->input('progress_action');
-         DB::table('actie')
+         DB::table('acties')
          ->where('id', $id)
          ->update(['voortgang' => $data]);
 
