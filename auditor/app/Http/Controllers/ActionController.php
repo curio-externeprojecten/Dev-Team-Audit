@@ -134,7 +134,7 @@ class ActionController extends Controller
         $sectors = DB::table('sector')->get();
         $risicosoorten = DB::table('risicosoort')->get();
         $risicoclassificaties = DB::table('risicoclassificatie')->get();
-        $users = DB::table('users')->where('name')->get();
+        $users = DB::table('users')->get();
         $statussen = DB::table('status')->get();
 
         return view('auditor.create_action' , [
@@ -170,9 +170,10 @@ public function saveAction(Request $request) {
         'sector_id' => $request->sector_id, 
         'risicosoort_id' => $request->risicosoort_id, 
         'risico_beschrijving' => $request->risico_beschrijving, 
-        'status_id' => $request->status_id
+        'status_id' => $request->status_id,
+        'probleem_eigenaar_id' => $request->probleem_eigenaar_id
         ]);
-    
+    return redirect('dashboard');
 }
 
 }
