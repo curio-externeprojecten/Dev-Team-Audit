@@ -265,7 +265,7 @@
             <div class="form-group d-flex justify-content-around">
 
                 {{-- <form action="{{url('progress_action')}}" method="POST"> --}}
-           <form action="{{route('progress.action', $action->id)}}" method="POST">
+           <form action="{{route('progress.action', $action->actie_id)}}" method="POST">
             @method('PUT')
                     {{-- <input type="hidden" value="{{$action->id}}" name="action_id"> --}}
                         @csrf
@@ -280,7 +280,7 @@
                             <input type="submit" value="Verzend Voortgang">
                     </form>
    
-                    <form action="{{route('comment.action', $action->id)}}" method="POST">
+                    <form action="{{route('comment.action', $action->actie_id)}}" method="POST">
                         @method('PUT')
                             @csrf
                             <div class="pt-2 ">   
@@ -310,7 +310,7 @@
     </div> --}}
     <form action="{{url('finish_action')}}" method="POST">
         @csrf
-        <input type="hidden" value="{{$action->id}}" name="action_id">
+        <input type="hidden" value="{{$action->actie_id}}" name="action_id">
         <div>
             {{-- <div class="form-group mt-3 ml-3 mr-3">
                 <h3><b>Opmerking</b></h3>
