@@ -122,13 +122,7 @@ class ActionController extends Controller
                 ]);
     }   
 
-    public function createActionPage(){
-        $sectors = DB::table('sector')->get();
-        $risicosoorten = DB::table('risicosoort')->get();
-        $risicoclassificaties = DB::table('risicoclassificatie')->get();
-        $users = DB::table('users')->where('name')->get();
-        $statussen = DB::table('status')->get();
-    }
+
 
     public function createAction() {
         $sectors = DB::table('sector')->get();
