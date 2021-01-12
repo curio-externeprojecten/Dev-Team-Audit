@@ -42,7 +42,7 @@
                                     @if ($action->deadline_bijgesteld != null)
                                         <p>Datum deadline bijgesteld naar: <b>{{ $action->deadline_bijgesteld }}</b></p>
                                     @else
-                                        <p>Datum deadline: <b>{{ $action->datum_deadline }}</b</p>
+                                        <p>Datum deadline: <b>{{ $action->datum_deadline }}</b></p>
                                     @endif
                                         <p>Voortgang: <b>{{ $action->voortgang }}</b></p>
                                     @if ($action->opmerking_actie_eigenaar != null)
