@@ -83,13 +83,13 @@ class DashboardController extends Controller
             }
             
             else if ( $role == "Probleem-Eigenaar" ){
-                $actions = DB::table('actie')->select('*')->where('probleem_eigenaar_id', $id)->get();
+                $actions = DB::table('acties')->select('*')->where('probleem_eigenaar_id', $id)->get();
                 return $actions;
             }
             else {  
                // @if($action->actie_eigenaar_status == null || $action->actie_eigenaar_status == 'AE-teruggestuurd')
        
-                $actions = DB::table('actie')->select('*')->where('actie_eigenaar_id', $id)
+                $actions = DB::table('acties')->select('*')->where('actie_eigenaar_id', $id)
                 ->where('actie_eigenaar_status', 'AE-teruggestuurd')->orWhere('actie_eigenaar_status', null)->get();
 
                 return $actions;
