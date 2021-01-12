@@ -171,6 +171,7 @@ public function saveAction(Request $request) {
         'risicosoort_id' => $request->risicosoort_id, 
         'risico_beschrijving' => $request->risico_beschrijving, 
         'status_id' => $request->status_id,
+        'risicoclassificatie_id' => $request->risicoclassificatie_id,
         'probleem_eigenaar_id' => $request->probleem_eigenaar_id
         ]);
     return redirect('dashboard');
