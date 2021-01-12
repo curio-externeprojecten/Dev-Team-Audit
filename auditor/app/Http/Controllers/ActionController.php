@@ -114,7 +114,7 @@ class ActionController extends Controller
                 $actions = DB::table('actie')
                 ->where('probleem_eigenaar_id', $id)
                 ->join('users', 'users.id', '=', 'actie.actie_eigenaar_id')
-                ->select('users.name', 'users.id', 'actie_eigenaar_id', 'omschrijving', 'actie_eigenaar_status', 
+                ->select('users.name', 'actie.id', 'actie_eigenaar_id', 'omschrijving', 'actie_eigenaar_status', 
                 'voortgang', 'datum_deadline', 'deadline_bijgesteld', 'audit_oordeel_ia', 'bron_detail')
                 ->get();
                 
