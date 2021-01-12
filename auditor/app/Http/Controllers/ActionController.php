@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use App\Models\Actie;
 
 class ActionController extends Controller
 {
@@ -64,9 +65,8 @@ class ActionController extends Controller
         
         return redirect()->action([ActionController::class, 'received']);
     }
-    public function createAction(Request $request) {
+    public function createAction() {
 
-    
         $sectors = \DB::table('sector')->get();
         $risicosoorten = \DB::table('risicosoort')->get();
         $risicoclassificaties = \DB::table('risicoclassificatie')->get();
@@ -81,7 +81,38 @@ class ActionController extends Controller
             'statussen' => $statussen
         ]);
     
+}
 
+
+public function saveAction(Request $request) {
+    //$actie = DB::table('actie');
+    $actie = Actie::create([
+        'create_date' => $request->create_date,
+        'bron_detail' => $request->bron_detail,
+        'audit_oordel' => $request->audit_oordel, 
+        'process' => $request->process, 
+        'nummer_bevinding' => $request->nummer_bevinding, 
+        'omschrijving_bevinding' => $request->omschrijving_bevinding, 
+        'probleem' => $request->probleem, 
+        'risico_beschrijving' => $request->risico_beschrijving, 
+        'oorzaak' => $request->oorzaak, 
+        'aanbeveling_ia' => $request->aanbeveling_ia, 
+        'map' => $request->map, 
+        'datum_deadline' => $request->datum_deadline, 
+        'datum_bijgesteld' => $request->datum_bijgesteld, 
+        'datum_gesloten' => $request->datum_gesloten, 
+        'voortgang' => $request->voortgang, 
+        'aantekeningen_ia' => $request->aantekeningen_ia, 
+        'oordeel_ia' => $request->oordeel_ia, 
+        'sector' => $request->sector, 
+        'pr' => $request->pr, 
+        'sr' => $request->sr, 
+        'arc' => $request->arc, 
+        'orc' => $request->orc, 
+        'grc' => $request->grc, 
+        'status' => $request->status, 
+        'sub_status' => $request->sub_status
+        ]);
     
 }
 
