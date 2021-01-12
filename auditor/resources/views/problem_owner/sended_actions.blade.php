@@ -43,7 +43,13 @@
                                     @else
                                         <p>Datum deadline: <b>{{ $action->datum_deadline }}</b></p>
                                     @endif
-                                    <p>Voortgang: <b>{{ $action->voortgang }}</b></p>
+                                        <p>Voortgang: <b>{{ $action->voortgang }}</b></p>
+                                    @if ($action->opmerking_actie_eigenaar != null)
+                                        <p>Opmerking Actie Eigenaar: <b>{{ $action->opmerking_actie_eigenaar }}</b></p>
+                                    @endif
+                                    @if ($action->opmerking_audit != null)
+                                            <p>Opmerking Audit: <b>{{ $action->opmerking_audit }}</b></p>
+                                    @endif
                                     <a href="action?id={{$id}}" class="btn btn-outline-secondary">{{ $action->omschrijving }}</a>
                                 </footer>
                                 </blockquote>

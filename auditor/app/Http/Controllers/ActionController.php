@@ -116,7 +116,7 @@ class ActionController extends Controller
                 ->join('users', 'users.id', '=', 'acties.actie_eigenaar_id')
                 ->select('users.name', 'acties.*')
                 ->get();
-
+                
                 return view('problem_owner.sended_actions', [
                     'actions' => $actions
                 ]);;
