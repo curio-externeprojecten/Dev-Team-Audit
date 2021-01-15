@@ -38,10 +38,10 @@ class ActionController extends Controller
         ->select('acties.*', 'users.name', 'acties.actie_eigenaar_status as AE_status', 'acties.probleemeigenaar_status as PE_status', 'risicosoort.primair')
         ->where([
             ['probleem_eigenaar_id', $id],
-            ['actie_eigenaar_status', "AE-afgerond"],
+            ['probleemeigenaar_status', 'PE-teruggestuurd'],
         ])->orWhere([
             ['probleem_eigenaar_id', $id],
-            ['probleemeigenaar_status', "PE-teruggestuurd"],
+            ['actie_eigenaar_status', 'AE-afgerond'],
         ])->get();
 
         return view('problem_owner.received_actions', ['actions' => $actions]);
@@ -141,55 +141,130 @@ class ActionController extends Controller
     }
 
 
-public function saveAction(Request $request) {
-    //$actie = DB::table('actie');
-    $acties = Acties::create([
-        'datum_ontstaan' => $request->datum_ontstaan,
-        'bron_detail' => $request->bron_detail,
-        'audit_oordeel_ia' => $request->audit_oordeel_ia, 
-        'proces' => $request->proces, 
-        'nr_bevindingen' => $request->nr_bevindingen, 
-        'omschrijving' => $request->omschrijving, 
-        'situatie' => $request->situatie, 
-        'risico_beschrijving' => $request->risico_beschrijving, 
-        'oorzaak' => $request->oorzaak, 
-        'aanbeveling_internal_audit' => $request->aanbeveling_internal_audit, 
-        'management_actie_plan' => $request->management_actie_plan, 
-        'datum_deadline' => $request->datum_deadline, 
-        'deadline_bijgesteld' => $request->deadline_bijgesteld, 
-        'datum_gesloten' => $request->datum_gesloten, 
-        'voortgang' => $request->voortgang, 
-        'aantekening_ia' => $request->aantekening_ia, 
-        'oordeel_ia' => $request->oordeel_ia, 
-        'sector_id' => $request->sector_id, 
-        'risicosoort_id' => $request->risicosoort_id, 
-        'risico_beschrijving' => $request->risico_beschrijving, 
-        'status_id' => $request->status_id,
-        'risicoclassificatie_id' => $request->risicoclassificatie_id,
-        'probleem_eigenaar_id' => $request->probleem_eigenaar_id
-    ]);
+    public function saveAction(Request $request) {
+        //$actie = DB::table('actie');
+        $acties = Acties::create([
+            'datum_ontstaan' => $request->datum_ontstaan,
+            'bron_detail' => $request->bron_detail,
+            'audit_oordeel_ia' => $request->audit_oordeel_ia, 
+            'proces' => $request->proces, 
+            'nr_bevindingen' => $request->nr_bevindingen, 
+            'omschrijving' => $request->omschrijving, 
+            'situatie' => $request->situatie, 
+            'risico_beschrijving' => $request->risico_beschrijving, 
+            'oorzaak' => $request->oorzaak, 
+            'aanbeveling_internal_audit' => $request->aanbeveling_internal_audit, 
+            'management_actie_plan' => $request->management_actie_plan, 
+            'datum_deadline' => $request->datum_deadline, 
+            'deadline_bijgesteld' => $request->deadline_bijgesteld, 
+            'datum_gesloten' => $request->datum_gesloten, 
+            'voortgang' => $request->voortgang, 
+            'aantekening_ia' => $request->aantekening_ia, 
+            'oordeel_ia' => $request->oordeel_ia, 
+            'sector_id' => $request->sector_id, 
+            'risicosoort_id' => $request->risicosoort_id, 
+            'risico_beschrijving' => $request->risico_beschrijving, 
+            'status_id' => $request->status_id,
+            'risicoclassificatie_id' => $request->risicoclassificatie_id,
+            'probleem_eigenaar_id' => $request->probleem_eigenaar_id,
+            'status' => 1
+        ]);
 
-    DB::table('actie_link')->insert([
-        'actie_id' => $acties->id,
-        'aanmaker_id' => Auth::id()
-    ]);
-    return redirect('dashboard');
-}
+        DB::table('actie_link')->insert([
+            'actie_id' => $acties->id,
+            'aanmaker_id' => Auth::id()
+        ]);
+        return redirect('dashboard');
+    }
 
-// Method to update an comment to an action (ACTION OWNER COMMENT)
+    // Method to update an comment to an action (ACTION OWNER COMMENT)
 
-public function UpdateComment(Request $request, $id){
-    // $id = $request->input('action_id');
-    $data = $request->input('comment_action');
+    public function UpdateComment(Request $request, $id){
+        // $id = $request->input('action_id');
+        $data = $request->input('comment_action');
 
-    //$action = DB::table('actie')->where('id', $id);
-     //$data = $request->input('progress_action');
-     DB::table('acties')
-     ->where('id', $id)
-     ->update(['opmerking_actie_eigenaar' => $data]);
-    
-    // return view("action_owner.a
-    return redirect()->back();
-}
+        //$action = DB::table('actie')->where('id', $id);
+        //$data = $request->input('progress_action');
+        DB::table('acties')
+        ->where('id', $id)
+        ->update(['opmerking_actie_eigenaar' => $data]);
+        
+        // return view("action_owner.a
+        return redirect()->back();
+    }
 
+    public function AU_received() {
+        // get id & get the data from the database
+        $id = Auth::id();
+        $actions = DB::table('acties')
+        ->leftJoin('users', 'acties.actie_eigenaar_id', '=', 'users.id')
+        ->leftJoin('actie_link', 'acties.id', '=', 'actie_link.actie_id')
+        ->leftJoin('risicosoort', 'acties.risicosoort_id', '=', 'risicosoort.id')
+        ->select('actie_link.actie_id', 'actie_link.aanmaker_id','acties.*', 'acties.probleemeigenaar_status as PE_status', 'risicosoort.primair')
+        ->where('actie_link.aanmaker_id', $id)
+        ->where('acties.probleemeigenaar_status', 'PE-afgerond')
+        ->get();
+
+        return view('auditor.received_actions', ['actions' => $actions]);
+    }
+
+    public function AU_actionReceiver(Request $request) {
+        // using request for clearer overview
+        // set the id & what is changing
+        $id = $request->input('action_checkbox');
+        $change = $request->input('opmerking_action');
+        $btn = "passed";
+        
+        // check what button is pressed
+        if (isset($_POST['btnFailed'])) {
+            $btn = "failed";
+        }
+
+        // updates
+        if($btn == "passed"){
+            $data = $request->input('opmerking');
+            $affected = DB::table('acties')
+              ->where('id', $id)
+              ->update(['opmerking_audit' => $change, 'au_status' => "AU-afgerond", 'probleemeigenaar_status' => null]);
+        }
+        else if ($btn == "failed"){
+            $affected = DB::table('acties')
+              ->where('id', $id)
+              ->update(['opmerking_audit' => $change, 'probleemeigenaar_status' => "PE-teruggestuurd"]);
+        }
+        
+        return redirect()->route('AU_received');
+    }
+
+    public function AU_showAction($id) {
+        // query breaks when status_id == null?
+        $action = DB::table('acties')
+        ->join('sector', 'acties.sector_id' ,'=', 'sector.id' )
+        ->join('risicosoort', 'acties.risicosoort_id', '=', 'risicosoort.id')
+        ->join('risicoclassificatie', 'acties.risicoclassificatie_id', '=', 'risicoclassificatie.id')
+        ->join('users', 'acties.probleem_eigenaar_id', '=', 'users.id')
+        ->where('acties.id', '=', $id)->first();
+
+        $actionOwner = DB::table('acties')->join('users', 'acties.actie_eigenaar_id', '=', 'users.id')->where('acties.id', $id)->get();
+        
+        return view('auditor.actions', [
+            'action' => $action,
+            'actionOwner' => $actionOwner
+        ]);
+    }
+
+    public function AU_showClosedActions() {
+        // get id & get the data from the database
+        $id = Auth::id();
+        $actions = DB::table('acties')
+        ->leftJoin('users', 'acties.actie_eigenaar_id', '=', 'users.id')
+        ->leftJoin('actie_link', 'acties.id', '=', 'actie_link.actie_id')
+        ->leftJoin('risicosoort', 'acties.risicosoort_id', '=', 'risicosoort.id')
+        ->select('actie_link.actie_id', 'actie_link.aanmaker_id','acties.*', 'acties.probleemeigenaar_status as PE_status', 'risicosoort.primair')
+        ->where('actie_link.aanmaker_id', $id)
+        ->where('acties.au_status', 'AU-afgerond')
+        ->get();
+
+        return view('auditor.closed_actions', ['actions' => $actions]);
+    }
 }
