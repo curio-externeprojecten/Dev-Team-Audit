@@ -70,8 +70,8 @@
           <input type="text-area" class="form-control" name="management_actie_plan">
         </div>
         <div class="form-group">
-          <label for="datum_gesloten">Datum gesloten</label>
-          <input type="date" class="form-control" name="datum_gesloten">
+          <label for="datum_deadline">Datum deadline</label>
+          <input type="date" class="form-control" name="datum_deadline">
         </div>
         <div class="form-group">
           <label for="aantekeningen_ia">Aantekeningen IA</label>
