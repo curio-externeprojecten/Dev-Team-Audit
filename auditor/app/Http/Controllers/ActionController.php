@@ -205,6 +205,8 @@ class ActionController extends Controller
         // set the id & what is changing
         $id = $request->input('action_checkbox');
         $change = $request->input('opmerking_action');
+        $change_oordeel = $request->input('oordeel_action');
+        $now = date('Y-m-d H:i');
         $btn = "passed";
         
         // check what button is pressed
@@ -217,12 +219,12 @@ class ActionController extends Controller
             $data = $request->input('opmerking');
             $affected = DB::table('acties')
               ->where('id', $id)
-              ->update(['opmerking_audit' => $change, 'au_status' => "AU-afgerond", 'probleemeigenaar_status' => null]);
+              ->update(['opmerking_audit' => $change, 'oordeel_ia' => $change_oordeel, 'au_status' => "AU-afgerond", 'probleemeigenaar_status' => null, 'datum_gesloten' => $now]);
         }
         else if ($btn == "failed"){
             $affected = DB::table('acties')
               ->where('id', $id)
-              ->update(['opmerking_audit' => $change, 'probleemeigenaar_status' => "PE-teruggestuurd"]);
+              ->update(['opmerking_audit' => $change, 'oordeel_ia' => $change_oordeel, 'probleemeigenaar_status' => "PE-teruggestuurd"]);
         }
         
         return redirect()->route('AU_received');

@@ -68,6 +68,13 @@
             </div>
         </div>
 
+        <div>
+            <div class="form-group mt-3">
+                <h3><b>Oordeel</b></h3>
+                <textarea class="w-100 --textarea-opmerking form-control" name="oordeel_action" id="oordeel_action" cols="30" rows="5" required></textarea>
+            </div>
+        </div>
+
         <div class="d-flex justify-content-around">
             <input type="submit" name="btnCorrect" class="btn btn-primary m-2 w-50" value="Goedkeuren en afronden">
             <input type="submit" name="btnFailed" class="btn btn-primary m-2 w-50" value="Terugsturen naar probleem-eigenaar">
