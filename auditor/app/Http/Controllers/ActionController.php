@@ -192,7 +192,7 @@ class ActionController extends Controller
         ->leftJoin('users', 'acties.actie_eigenaar_id', '=', 'users.id')
         ->leftJoin('actie_link', 'acties.id', '=', 'actie_link.actie_id')
         ->leftJoin('risicosoort', 'acties.risicosoort_id', '=', 'risicosoort.id')
-        ->select('actie_link.actie_id', 'actie_link.aanmaker_id','acties.*', 'acties.probleemeigenaar_status as PE_status', 'risicosoort.primair')
+        ->select('actie_link.actie_id', 'actie_link.aanmaker_id','acties.*', 'users.name', 'acties.probleemeigenaar_status as PE_status', 'risicosoort.primair')
         ->where('actie_link.aanmaker_id', $id)
         ->where('acties.probleemeigenaar_status', 'PE-afgerond')
         ->get();
