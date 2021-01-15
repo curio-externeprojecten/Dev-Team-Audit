@@ -79,18 +79,16 @@ class DashboardController extends Controller
 
         if($id){
               // Check what role the user has so we can send all the right actions to the desired person
-            if( $role == "Auditor" ){
-                
-            }
-            
-            else if ( $role == "Probleem-Eigenaar" ){
+            if ( $role == "Probleem-Eigenaar" ){
                 $actions = DB::table('acties')->select('*')->where('probleem_eigenaar_id', $id)->get();
                 return $actions;
             }
             else {  
                // @if($action->actie_eigenaar_status == null || $action->actie_eigenaar_status == 'AE-teruggestuurd')
        
-               $actions = DB::table('acties')->select('*')
+               $actions = DB::table('acties')
+               ->join('risicosoort', 'acties.risicosoort_id', '=', 'risicosoort.id')
+               ->select('*')
                ->where('actie_eigenaar_id', $id)
                ->where(function ($query) {
                    $query->where('actie_eigenaar_status', '=', 'AE-teruggestuurd')
