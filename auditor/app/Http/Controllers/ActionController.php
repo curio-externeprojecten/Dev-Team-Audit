@@ -23,7 +23,7 @@ class ActionController extends Controller
                 ->join('risicoclassificatie', 'acties.risicoclassificatie_id', '=', 'risicoclassificatie.id')
                 ->join('users', 'acties.probleem_eigenaar_id', '=', 'users.id')
                 ->leftJoin('status', 'acties.status_id', '=', 'status.id')->where('acties.id', $actionID)->first();
-          
+            
                 return view('action_owner.action', [
                     'action' => $action
                 ]);
