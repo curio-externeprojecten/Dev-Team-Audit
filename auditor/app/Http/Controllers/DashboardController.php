@@ -56,7 +56,8 @@ class DashboardController extends Controller
             else {
 
                 return view('action_owner.dashboard', [
-                    'actions' => $actions
+                    'actions' => $actions,
+                    'risicosoorten' => $risicosoorten
                 ]);
                
             }
