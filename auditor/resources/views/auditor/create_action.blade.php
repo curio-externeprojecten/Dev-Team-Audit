@@ -70,24 +70,12 @@
           <input type="text-area" class="form-control" name="management_actie_plan">
         </div>
         <div class="form-group">
-          <label for="datum_deadline">Datum deadline</label>
-          <input type="date" class="form-control" name="datum_deadline">
-        </div>
-        <div class="form-group">
           <label for="datum_gesloten">Datum gesloten</label>
           <input type="date" class="form-control" name="datum_gesloten">
         </div>
         <div class="form-group">
-          <label for="voortgang">Voortgang</label>
-          <input type="text" class="form-control" name="voortgang">
-        </div>
-        <div class="form-group">
           <label for="aantekeningen_ia">Aantekeningen IA</label>
           <input type="text" class="form-control" name="aantekening_ia">
-        </div>
-        <div class="form-group">
-          <label for="oordeel_ia">Oordeel IA</label>
-          <input type="text" class="form-control" name="oordeel_ia">
         </div>
         <div class="form-group">
           <label for="sector">Selecteer sector</label>

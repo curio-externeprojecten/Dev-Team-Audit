@@ -16,6 +16,12 @@ Route::get('create_action', [App\Http\Controllers\ActionController::class, 'crea
 Route::post('create_action', [App\Http\Controllers\ActionController::class, 'saveAction'])->name('auditor.create_action');
 
 
+Route::get('/auditor/received', [App\Http\Controllers\ActionController::class, 'AU_received'])->name('AU_received');
+Route::post('/auditor/received/action', [App\Http\Controllers\ActionController::class, 'AU_actionReceiver'])->name('AU_receivedAction');
+Route::get('/auditor/received/action/{id}', [App\Http\Controllers\ActionController::class, 'AU_showAction'])->name('AU_receivedShowAction');
+Route::get('/auditor/actions/closed', [App\Http\Controllers\ActionController::class, 'AU_showClosedActions']);
+
+
 // PROBLEM OWNER
 
 Route::get('/received', [App\Http\Controllers\ActionController::class, 'received']);
