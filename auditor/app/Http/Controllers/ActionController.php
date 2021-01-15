@@ -48,31 +48,44 @@ class ActionController extends Controller
     }
 
     public function PE_actionReceiver(Request $request) {
-        // using request for clearer overview
-        // set the id & what is changing
-        $id = $request->input('action_checkbox');
-        $change = $request->input('opmerking_action');
-        $btn = "passed";
-        
-        // check what button is pressed
-        if (isset($_POST['btnFailed'])) {
-            $btn = "failed";
-        }
+        // check to see if we come from received or 
+        // if the problem owner makes his own action
+        if (null !== $request->input('action_checkbox')){
+            // using request for clearer overview
+            // set the id & what is changing
+            $id = $request->input('action_checkbox');
+            $change = $request->input('opmerking_action');
+            $btn = "passed";
+            
+            // check what button is pressed
+            if (isset($_POST['btnFailed'])) {
+                $btn = "failed";
+            }
 
-        // updates
-        if($btn == "passed"){
-            $data = $request->input('opmerking');
-            $affected = DB::table('acties')
-              ->where('id', $id)
-              ->update(['opmerking_probleem_eigenaar' => $change, 'probleemeigenaar_status' => "PE-afgerond", 'actie_eigenaar_status' => NULL]);
+            // updates
+            if($btn == "passed"){
+                $data = $request->input('opmerking');
+                $affected = DB::table('acties')
+                ->where('id', $id)
+                ->update(['opmerking_probleem_eigenaar' => $change, 'probleemeigenaar_status' => "PE-afgerond", 'actie_eigenaar_status' => NULL]);
+            }
+            else if ($btn == "failed"){
+                $affected = DB::table('acties')
+                ->where('id', $id)
+                ->update(['opmerking_probleem_eigenaar' => $change, 'actie_eigenaar_status' => "AE-teruggestuurd"]);
+            }
+            
+            return redirect()->action([ActionController::class, 'received']);
         }
-        else if ($btn == "failed"){
+        else {
+            $id = $request->input('action_id');
             $affected = DB::table('acties')
-              ->where('id', $id)
-              ->update(['opmerking_probleem_eigenaar' => $change, 'actie_eigenaar_status' => "AE-teruggestuurd"]);
+            ->where('id', $id)
+            ->update(['probleemeigenaar_status' => "PE-afgerond", 'actie_eigenaar_status' => NULL]);
+
+            return redirect()->route('dashboard');
         }
         
-        return redirect()->action([ActionController::class, 'received']);
     }
 
     public function PE_showAction($id) {
