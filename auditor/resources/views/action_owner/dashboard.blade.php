@@ -34,7 +34,6 @@
                     {{-- @if($action->actie_eigenaar_status == null || $action->actie_eigenaar_status == 'AE-teruggestuurd') --}}
 
                     <div class="p-3 w-100">
-
                         <div class="d-flex p-2 pl-4 action-bg justify-content-between">
 
                             <div><strong>{{ ucwords($action->bron_detail) }}</strong></div>
@@ -47,9 +46,9 @@
                                 <span class="badge badge-primary mr-2">{{ $action->primair }}</span>
                             </div>                                    
                             <p class="m-0 p-0">Deadline: {{ $action->datum_deadline }}</p>
-                            <a href='action?id={{$id}}' class="btn btn-sm btn-primary mt-2 mb-2">Bekijk deze actie</a>
+                            <a href='action?id={{$action->actie_id}}' class="btn btn-sm btn-primary mt-2 mb-2">Bekijk deze actie</a>
                         </div>
-
+                        
                     </div>
                     
                 

@@ -88,7 +88,7 @@ class DashboardController extends Controller
        
                $actions = DB::table('acties')
                ->join('risicosoort', 'acties.risicosoort_id', '=', 'risicosoort.id')
-               ->select('*')
+               ->select('*', 'acties.id as actie_id')
                ->where('actie_eigenaar_id', $id)
                ->where(function ($query) {
                    $query->where('actie_eigenaar_status', '=', 'AE-teruggestuurd')
