@@ -2,7 +2,7 @@
 
 
 @section('title')
-    
+    Problem Owner Received
 @endsection
 
 @section('header')
@@ -277,5 +277,16 @@
          </li>
 
         
-    </ul>    
+    </ul>  
+    @if($_SESSION['role'] == 'Actie-Eigenaar')
+    <form action="{{url('finish_action')}}" method="POST">
+        @csrf
+        <input type="hidden" value="{{$action->id}}" name="action_id">
+
+        <div class="d-flex justify-content-around">
+            
+            <input type="submit" name="finish_action" class="btn btn-primary m-2 w-50" value="Doorsturen naar probleemeigenaar">
+        </div>
+    </form>
+    @endif
 @endsection

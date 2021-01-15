@@ -21,6 +21,7 @@
 
 @section('content')
 <div class="container">
+  
     <form action="{{route('PE_receivedAction')}}" method="POST">
         @csrf
 
@@ -28,6 +29,7 @@
             <h2 class="m-0 mt-3 p-0"><b>Acties</b></h2>
             <ul class="--list">
                 @foreach ($actions as $action)
+         
                     <label for="action{{ $action->id }}_checkbox" onclick="checkMyCheckbox()">
                         <li class="d-flex mb-2">
                         <input type="checkbox" name="action_checkbox" class="action_checkbox mt-4" value="{{ $action->id }}" id="action{{ $action->id }}_checkbox">
