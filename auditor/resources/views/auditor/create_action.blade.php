@@ -127,7 +127,7 @@
             </div>          
         
       
-        <button type="submit" class="btn btn-primary" name="submitBtn" value="submitPost"><strong>Maak actie aan</strong></button>
+        <button type="submit" class="btn btn-lg btn-block" style="background:var(--bg-dropdown); color:var(--color-dropdown);" name="submitBtn" value="submitPost"><strong>Maak actie aan</strong></button>
       </form>
              
       @endsection  
