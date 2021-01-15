@@ -28,7 +28,7 @@
             <ul class="list-group">
                 @foreach ($actions as $action)
         
-                    @if ($action->actie_eigenaar_id != null && $action->probleemeigenaar_status != 'PE-afgerond' && $action->actie_eigenaar_status != 'AE-afgerond')
+                    @if ($action->actie_eigenaar_id != null && $action->probleemeigenaar_status != 'PE-afgerond' && $action->actie_eigenaar_status != 'AE-afgerond' && $action->au_status != "AU-afgerond")
                         <li class="list-group-item">
                             <div class="form-check">
                                 <?php $id = $action->id?>

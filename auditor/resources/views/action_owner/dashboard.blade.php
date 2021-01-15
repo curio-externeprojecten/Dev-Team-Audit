@@ -44,7 +44,7 @@
                         <div class="pt-2 pl-4" style="background:white;">
                             <div class="d-flex justify-content-between align-items-center">
                                 <p class="m-0 p-0">Actie Omschrijving: {{ $action->omschrijving }}</p>
-                                <span class="badge badge-primary mr-2">{{ $risicosoorten[0]->primair}}</span>
+                                <span class="badge badge-primary mr-2">{{ $action->primair }}</span>
                             </div>                                    
                             <p class="m-0 p-0">Deadline: {{ $action->datum_deadline }}</p>
                             <a href='action?id={{$id}}' class="btn btn-sm btn-primary mt-2 mb-2">Bekijk deze actie</a>
