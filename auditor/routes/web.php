@@ -30,6 +30,7 @@ Route::post('voortgang_action', [App\Http\Controllers\ProgressController::class,
 Route::get('action_owner', function(){
     return view('action_owner\action');
 });
+
 // ROUTE FOR: UPDATE PROGRESS 
 Route::put('progress_action/{id}',[App\Http\Controllers\ProgressController::class, 'SendProgress'])->name('progress.action');
 // ROUTE FOR: UPDATE COMMENT
