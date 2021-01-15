@@ -122,8 +122,6 @@ class ActionController extends Controller
                 ]);
     }   
 
-
-
     public function createAction() {
         $sectors = DB::table('sector')->get();
         $risicosoorten = DB::table('risicosoort')->get();
@@ -140,7 +138,6 @@ class ActionController extends Controller
         ]);
     }
 
-
     public function saveAction(Request $request) {
         //$actie = DB::table('actie');
         $acties = Acties::create([
@@ -156,18 +153,13 @@ class ActionController extends Controller
             'aanbeveling_internal_audit' => $request->aanbeveling_internal_audit, 
             'management_actie_plan' => $request->management_actie_plan, 
             'datum_deadline' => $request->datum_deadline, 
-            'deadline_bijgesteld' => $request->deadline_bijgesteld, 
-            'datum_gesloten' => $request->datum_gesloten, 
-            'voortgang' => $request->voortgang, 
             'aantekening_ia' => $request->aantekening_ia, 
-            'oordeel_ia' => $request->oordeel_ia, 
             'sector_id' => $request->sector_id, 
             'risicosoort_id' => $request->risicosoort_id, 
             'risico_beschrijving' => $request->risico_beschrijving, 
             'status_id' => $request->status_id,
             'risicoclassificatie_id' => $request->risicoclassificatie_id,
-            'probleem_eigenaar_id' => $request->probleem_eigenaar_id,
-            'status' => 1
+            'probleem_eigenaar_id' => $request->probleem_eigenaar_id
         ]);
 
         DB::table('actie_link')->insert([
@@ -175,7 +167,7 @@ class ActionController extends Controller
             'aanmaker_id' => Auth::id()
         ]);
         return redirect('dashboard');
-    }
+    }   
 
     // Method to update an comment to an action (ACTION OWNER COMMENT)
 
