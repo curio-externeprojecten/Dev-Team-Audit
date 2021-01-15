@@ -167,7 +167,12 @@ public function saveAction(Request $request) {
         'status_id' => $request->status_id,
         'risicoclassificatie_id' => $request->risicoclassificatie_id,
         'probleem_eigenaar_id' => $request->probleem_eigenaar_id
-        ]);
+    ]);
+
+    DB::table('actie_link')->insert([
+        'actie_id' => $acties->id,
+        'aanmaker_id' => Auth::id()
+    ]);
     return redirect('dashboard');
 }
 
